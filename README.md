@@ -2,7 +2,7 @@
 
 ## 这个项目在做什么
 
-在**本机**把 B 站视频转成可核对的 **`{BV号}_transcript.json`**（分段时间轴、可选词级时间戳），再生成可检阅的 **`{标题slug}_{BV号}_transcript_成稿.md`**（全文总结、分话题小节、段前摘要、逐字正文）。**Python 流水线只负责文字稿与初版成稿结构，不调用大模型 HTTP API**；成稿的总结、翻译与润色由 **Cursor** 按 [成稿 Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)（子 Agent）完成。若需要**网页阅读版**，在成稿 `.md` 就绪后由**另一个子 Agent** 按 [莫兰迪 HTML Skill](.cursor/skills/bilibili-morandi-html/SKILL.md) 生成同名的 **`*_transcript_成稿.html`**（单文件、内联样式，**仓库不提供** `md→html` 脚本）。
+在**本机**把 B 站视频转成可核对的 **`{BV号}_transcript.json`**（分段时间轴、可选词级时间戳），再生成可检阅的 **`{标题slug}_{BV号}_transcript_成稿.md`**（全文总结、分话题小节、段前摘要、逐字正文）。**Python 流水线只负责文字稿与初版成稿结构，不调用大模型 HTTP API**；成稿的总结、翻译与润色由 **Cursor** 按 [成稿 Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)（子 Agent）完成。在 Cursor 里，**默认**在成稿 `.md` 就绪后再由**另一个子 Agent** 按仓库文档 [**`docs/transcript_morandi_html/README.md`**](docs/transcript_morandi_html/README.md)（及同目录 `morandi-template.html`）生成同名的 **`*_transcript_成稿.html`**（单文件、内联样式；**不是**第二个 Cursor Skill，不增加本机 Skill 数量；**仓库不提供** `md→html` 脚本；用户明确只要 md 时可跳过）。
 
 **仓库**：<https://github.com/znygithub/bilibili-transcript>（公开，无密钥）
 
@@ -28,17 +28,17 @@ python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 
 ---
 
-## 2. 分工：脚本 = 文字稿；Cursor 子 Agent = 成稿；可选再开子 Agent = HTML
+## 2. 分工：脚本 = 文字稿；Cursor 子 Agent = 成稿；默认再开子 Agent = HTML
 
 | 层级 | 做什么 |
 |------|--------|
 | **脚本**（`bilibili_transcript`） | **只生成文字稿**：`*_transcript.json`（含分段时间与口播文本）。不写终稿总结、不做翻译终稿。 |
 | **Cursor（成稿）** | 按 **[`bilibili-transcript-finalize`](.cursor/skills/bilibili-transcript-finalize/SKILL.md)**：主 Agent 跑完脚本后，**用子 Agent** 分工完成 **全文总结、翻译、分节摘要、润色**，写入 `*_transcript_成稿.md`（勿用单条回复硬塞万字）。 |
-| **Cursor（可选网页）** | 成稿 `.md` 已落盘且需要阅读版时，主 Agent **再启动一个子 Agent**，读 **[`bilibili-morandi-html`](.cursor/skills/bilibili-morandi-html/SKILL.md)** 与目录内 `morandi-template.html`，生成 **`*_transcript_成稿.html`**。主对话同样不要整页贴 HTML。 |
+| **Cursor（默认可视化）** | 成稿 `.md` 已落盘后，主 Agent **默认再启动一个子 Agent**，读 **[`docs/transcript_morandi_html/README.md`](docs/transcript_morandi_html/README.md)** 与 **[`morandi-template.html`](docs/transcript_morandi_html/morandi-template.html)**，生成 **`*_transcript_成稿.html`**。主对话同样不要整页贴 HTML。用户**明确只要 md、不要网页**时可跳过。 |
 
-**用户操作**：发 **B 站链接** 或 `@` 已有 `*_transcript.json` 即可；**不要求**手抄 JSON。要网页版时说明「成稿转 HTML / 莫兰迪卡片」等即可。
+**用户操作**：发 **B 站链接** 或 `@` 已有 `*_transcript.json` 即可；**不要求**手抄 JSON。
 
-仓库内**没有** Python 调用 Cursor；子 Agent 是 Cursor 侧能力，不是脚本里的函数。**不提供**命令行 `md→html`，HTML 由子 Agent 按 Skill 写出。
+仓库内**没有** Python 调用 Cursor；子 Agent 是 Cursor 侧能力，不是脚本里的函数。**不提供**命令行 `md→html`，HTML 由子 Agent 按 **`docs/transcript_morandi_html/`** 指引写出（与成稿 Skill 分离，**不**再占一个全局 Skill）。生成 `*_transcript_成稿.html` 后应按该文档用 **`open` / `xdg-open` / `start`** **自动在浏览器中打开**，无需用户手动打开文件。
 
 ---
 
@@ -51,7 +51,7 @@ B 站 URL 或 BV 号
     → 合并分 P 分段 → 写入 *_transcript.json
     →（可选）finalize：生成初版成稿 md
     →（Cursor 子 Agent）bilibili-transcript-finalize：翻译 + 总结 + 润色 → *_transcript_成稿.md
-    →（可选，再开子 Agent）bilibili-morandi-html：成稿 md → 同路径 *_transcript_成稿.html
+    →（默认再开子 Agent）docs/transcript_morandi_html：成稿 md → 同路径 *_transcript_成稿.html
 ```
 
 ---
@@ -83,7 +83,7 @@ B 站 URL 或 BV 号
 | `*_transcript.json` | **事实源**：`bvid`、`title`、`text`、`segments[]`、`part_sources`。 |
 | `{bvid}_transcript.md` | 按时间分块的草稿；总结与话题标题为空或占位，需自行编辑（`--json-only` 时不生成）。 |
 | `{标题slug}_{BV号}_transcript_成稿.md` | **检阅用成稿**：Python 可出初版；终稿由 **Cursor Skill** 润色/翻译后覆盖（见上）。 |
-| `{标题slug}_{BV号}_transcript_成稿.html` | **可选**：单页阅读版，由 **Cursor** 按 `bilibili-morandi-html` 生成，与成稿同目录、同主文件名。 |
+| `{标题slug}_{BV号}_transcript_成稿.html` | **默认同套产出**：单页阅读版，由 **Cursor** 按 **`docs/transcript_morandi_html/`** 生成，与成稿同目录、同主文件名（用户明确不要网页时可无）。 |
 | `case_outputs/` | 示例输出目录；可含 `*_p1.mp3` 等。 |
 
 重新跑流水线会**覆盖**上述 md（手润稿请先备份）。
@@ -101,7 +101,7 @@ python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 
 常用参数见 [`TRANSCRIPT_STRATEGY.md`](TRANSCRIPT_STRATEGY.md)。
 
-**Skill 全局使用（可选）**：将 `.cursor/skills/bilibili-transcript-finalize/` 与 `.cursor/skills/bilibili-morandi-html/` 分别复制到 `~/.cursor/skills/<同名目录>/`，便于在其他仓库复用成稿与 HTML 指引。
+**Skill 全局使用（可选）**：将 `.cursor/skills/bilibili-transcript-finalize/` 复制到 `~/.cursor/skills/bilibili-transcript-finalize/`。成稿转网页的说明与模板在 **`docs/transcript_morandi_html/`**，随仓库克隆即可，**不必**再复制为第二个 Skill。
 
 ---
 

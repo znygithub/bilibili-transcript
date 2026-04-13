@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0302巴菲特谈如何学习会计知识</title>
+<style>
+  :root {
+    --bg: #f2eeea;
+    --card: #ffffff;
+    --border: #d6cec6;
+    --text: #4a4340;
+    --text-light: #8a7e78;
+    --heading: #5e5450;
+    --accent-1: #a89b91;
+    --accent-2: #b8a99a;
+    --accent-3: #c4b7a6;
+    --accent-4: #8d9a8e;
+    --accent-5: #97a3a0;
+    --quote-bg: #ece8e3;
+    --highlight: #d4c5b2;
+    --tag-bg: #e6dfda;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.85;
+    font-size: 16px;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  header h1 { font-size: 1.85rem; font-weight: 600; color: var(--heading); letter-spacing: 0.5px; margin-bottom: 8px; }
+  header .subtitle { font-size: 0.85rem; color: var(--text-light); letter-spacing: 1px; text-transform: uppercase; }
+  .summary-card {
+    background: var(--card); border-radius: 12px; padding: 32px; margin-bottom: 36px;
+    border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+  .summary-card h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-1); margin-bottom: 16px; font-weight: 600; }
+  .summary-card p { font-size: 0.95rem; color: var(--text); line-height: 1.9; margin-bottom: 14px; }
+  .summary-card p:last-of-type { margin-bottom: 0; }
+  .summary-card strong { color: var(--heading); font-weight: 600; }
+  .note { font-size: 0.82rem; color: var(--text-light); font-style: italic; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border); line-height: 1.75; }
+  .section { margin-bottom: 32px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .section-number {
+    width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .container > .section:nth-child(3) .section-number { background: var(--accent-1); }
+  .container > .section:nth-child(4) .section-number { background: var(--accent-4); }
+  .container > .section:nth-child(5) .section-number { background: var(--accent-2); }
+  .container > .section:nth-child(6) .section-number { background: var(--accent-5); }
+  .container > .section:nth-child(7) .section-number { background: var(--accent-3); }
+  .section-header h3 { font-size: 1.1rem; font-weight: 600; color: var(--heading); line-height: 1.4; }
+  .time-tag {
+    display: inline-block; font-size: 0.72rem; background: var(--tag-bg); color: var(--text-light);
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; font-family: "SF Mono", "Fira Code", monospace;
+  }
+  .section-intro { font-size: 0.88rem; color: var(--text-light); margin-bottom: 16px; line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border); }
+  .content-card {
+    background: var(--card); border-radius: 12px; padding: 28px; border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+  .content-card p { margin-bottom: 14px; font-size: 0.95rem; line-height: 1.9; }
+  .content-card p:last-child { margin-bottom: 0; }
+  .content-card strong, .summary-card strong {
+    color: var(--heading); font-weight: 600;
+    background: linear-gradient(to top, var(--highlight) 40%, transparent 40%); padding: 0 2px;
+  }
+  .speaker { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .speaker.a { color: var(--accent-1); }
+  .speaker.b { color: var(--accent-4); }
+  footer { text-align: center; padding-top: 40px; border-top: 1px solid var(--border); margin-top: 20px; }
+  footer p { font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.5px; margin-bottom: 8px; }
+  footer p:last-child { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 60px; }
+    header { padding: 40px 0 28px; }
+    header h1 { font-size: 1.45rem; }
+    .summary-card, .content-card { padding: 22px 18px; }
+    .section-header h3 { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>0302巴菲特谈如何学习会计知识</h1>
+    <div class="subtitle">BV14jDFBuE9d · B 站转写稿 · 2003 伯克希尔股东大会节选</div>
+  </header>
+
+  <div class="summary-card">
+    <h2>全文总结</h2>
+    <p>本段为 <strong>2003 年伯克希尔·哈撒韦股东大会</strong>问答节选（口播为英文，素材以 ASR 为准）。德国听众 <strong>Johan Freudenberg</strong> 向 <strong>沃伦·巴菲特</strong> 提问：你最喜欢哪本会计书。巴菲特回应：自己已很久没专门读会计教材，大学时读过 <strong>Finney</strong>，一直喜欢会计；对经商者而言「会计永远学不够」，但他本人并不掌握近年有哪些会计新书，或许 <strong>查理·芒格</strong>还在读。</p>
+    <p><strong>学习路径</strong>：他更希望人们长期阅读<strong>伯克希尔年报</strong>；真正进阶则靠阅读优质商业报道——尤其是涉及<strong>会计问题、会计丑闻</strong>的文章，弄清数字如何编制、底层原则，以及数字可被怎样操纵。会计数字是理解企业的<strong>原材料</strong>，但还须叠加其他判断。</p>
+    <p><strong>识别「看不懂的账」</strong>：若读不懂披露，往往是因为<strong>管理层不想让你读懂</strong>；数字被故意含糊时通常有目的，遇到这种情况最好<strong>远离</strong>。芒格补刀：问巴菲特有什么会计好书，就像问有什么「呼吸」好书——先掌握簿记的基本规则，再把会计与更大现实联系起来，这是<strong>终身功课</strong>。</p>
+    <div class="note">以下为根据 ASR 整理的简体中文译稿，专名与书名以口播为准。</div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <h3>开场提问：你最喜欢哪本会计书？</h3>
+    </div>
+    <span class="time-tag">⏱ 00:00 – 00:39</span>
+    <div class="section-intro">德国听众自报姓名并提问；巴菲特开场回应：自己已很久没读会计专著，回忆大学读过 Finney，并表示一直喜欢会计。</div>
+    <div class="content-card">
+      <p><span class="speaker a">听众</span></p>
+      <p>我叫 Johan Freudenberg，来自德国。我想知道您<strong>最喜欢的一本会计书</strong>是什么，谢谢。</p>
+      <p><span class="speaker b">巴菲特</span></p>
+      <p>嗯，我已经有<strong>很长一段时间</strong>没读过一本会计书了。我上大学的时候读过 <strong>Finney</strong>，我还记得。我一直很喜欢会计；如果你们当中有人对经商感兴趣，你知道，会计这东西<strong>基本上永远学不够</strong>。不过我呢，说实话，我并不是很清楚现在市面上有哪些会计新书。也许查理最近在读其中一些吧。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <h3>伯克希尔年报与商业文章：比单本书更重要</h3>
+    </div>
+    <span class="time-tag">⏱ 00:39 – 01:14</span>
+    <div class="section-intro">巴菲特建议长期读伯克希尔报告以体会会计；进阶则靠读涉及会计议题与丑闻的优质商业文章。</div>
+    <div class="content-card">
+      <p>我其实希望，如果你们<strong>长期阅读伯克希尔的年报</strong>，随着时间推移，你们能在会计上得到一些启发、学到一些东西。但我认为，在某种意义上，你一旦掌握了<strong>基础知识</strong>，你通过阅读<strong>优秀的商业文章</strong>——那些讨论<strong>会计问题、会计丑闻</strong>之类的文章——会学到更多会计。我是说，你真正需要知道的是：<strong>数字是怎么拼起来的</strong>、背后的<strong>原则</strong>是什么；然后你还得知道，<strong>人们能对数字做什么手脚</strong>。你要把会计数字当作理解一家企业的<strong>原材料</strong>来用。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <h3>年报、杂志与「读不懂」的信号</h3>
+    </div>
+    <span class="time-tag">⏱ 01:14 – 01:48</span>
+    <div class="section-intro">他强调除数字外还需额外判断；举杂志与年报经验；提出若自己读不懂，往往意味着管理层不想让你读懂。</div>
+    <div class="content-card">
+      <p>但你必须在数字之外<strong>再带一点别的东西进去</strong>。我想不出有哪本好书专门讲这个题目。这些年我读了很多<strong>优秀的杂志文章</strong>，它们为我的知识做了贡献。我也读了很多<strong>年报</strong>，见过人们能对会计<strong>做</strong>到什么程度。我以前也说过，如果<strong>我看不懂</strong>（披露），我通常会认为那是因为<strong>管理层不想让我看懂</strong>。而如果管理层不想让我看懂，那很可能<strong>有什么不对劲</strong>。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <h3>含糊的数字与芒格的开场调侃</h3>
+    </div>
+    <span class="time-tag">⏱ 01:49 – 02:16</span>
+    <div class="section-intro">巴菲特说人们不会无缘无故在数字上玩模糊；遇到就应回避；转向芒格。</div>
+    <div class="content-card">
+      <p>我是说，人们通常<strong>不会无缘无故</strong>用数字来含糊其辞。当你碰到那种情况时，最好的办法就是<strong>躲开</strong>。</p>
+      <p><span class="speaker a">芒格</span></p>
+      <p>是啊，问沃伦——你知道——他<strong>知道哪些关于会计的好书</strong>，这就像问他<strong>有哪些关于呼吸的好书</strong>一样。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <h3>芒格：簿记基础与终身学习</h3>
+    </div>
+    <span class="time-tag">⏱ 02:20 – 02:53</span>
+    <div class="section-intro">芒格解释：先学簿记基本规则，再花很长时间把会计与更大现实联系起来；主持人收尾切下一题。</div>
+    <div class="content-card">
+      <p>而这背后的含义是：你要从学习<strong>簿记的基本规则</strong>开始——那有点像<strong>加减法的基本规则</strong>。然后你得花<strong>很长时间</strong>，会计才会和<strong>更大的现实</strong>联系起来。而这是一个<strong>终生的过程</strong>。好，我们试着进入音乐环节。第九个，这样可以吗？</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>bilibili_transcript 成稿导出 · BV14jDFBuE9d · 仅供个人学习</p>
+    <p>源视频：<a href="https://www.bilibili.com/video/BV14jDFBuE9d/" style="color: var(--text-light);">bilibili.com/video/BV14jDFBuE9d</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

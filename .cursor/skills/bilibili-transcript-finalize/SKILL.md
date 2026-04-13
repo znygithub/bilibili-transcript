@@ -1,12 +1,18 @@
 ---
 name: bilibili-transcript-finalize
 description: >-
-  After bilibili_transcript script outputs transcript JSON only, Cursor spawns sub-agents to
-  translate and summarize into 成稿 Markdown. Primary trigger: user sends a Bilibili video URL.
-  Script does 文字稿; Cursor does 翻译与总结 via sub-agents. Also when user @ json or mentions 成稿.
+  After bilibili_transcript outputs transcript JSON, Cursor sub-agents produce 成稿.md, then by default
+  another sub-agent follows docs/transcript_morandi_html/README.md to produce 成稿.html.
+  Primary trigger: Bilibili URL. HTML uses repo docs only—no second Cursor Skill.
 ---
 
-# B 站：脚本出文字稿，Cursor 子 Agent 做翻译与总结
+# B 站：脚本出文字稿，Cursor 子 Agent 做成稿 +（默认）莫兰迪 HTML
+
+## 成稿转网页（莫兰迪）— 仓库文档，不是第二个 Skill
+
+- **位置**（相对仓库根目录）：[`docs/transcript_morandi_html/README.md`](../../docs/transcript_morandi_html/README.md) 与同目录 [`morandi-template.html`](../../docs/transcript_morandi_html/morandi-template.html)。
+- **是什么**：普通 Markdown 指引 + HTML 模板；**不**放在 `.cursor/skills/`，**不**增加本机全局 Skill 数量；由阶段③ 子 Agent **当操作规范阅读并执行**，效果类似 Skill，但无需单独注册。
+- **怎么用**：② 完成后 **默认**再启动子 Agent，指令中写明：阅读上述 **README** 与 **模板**，根据成稿 `*_transcript_成稿.md` 写出同路径 **`*_transcript_成稿.html`**；写完后按 **`docs/transcript_morandi_html/README.md`** 用 **`open` / `xdg-open` / `start`** 在默认浏览器**自动打开**该 HTML，**不要**只生成文件让用户自己点开。
 
 ## 分工（必须遵守）
 
@@ -14,23 +20,24 @@ description: >-
 |------|------|------|
 | **① 脚本** | `python -m bilibili_transcript`（本仓库 CLI） | **只生成文字稿**：`*_transcript.json`（含 `segments` 时间轴与口播文本）。可选 `{bvid}_transcript.md` 粗分块草稿。脚本**不写**全文总结、不做翻译、不把终稿成稿当唯一目标。 |
 | **② Cursor** | **主 Agent 编排 + 若干子 Agent** | 基于 JSON 做 **翻译**（英文 ASR→中文）、**总结**（全文总结 + 每节摘要）、标点与分段，输出 **`*_transcript_成稿.md`**。 |
-| **③ 可选** | **另一个 Cursor 子 Agent**（非脚本） | 在 **`*_transcript_成稿.md` 已生成** 之后，由主 Agent **单独启动子 Agent**，让其阅读 skill **`bilibili-morandi-html`**（含 `morandi-template.html`），把成稿转为单页 **`*_transcript_成稿.html`**。 |
+| **③ 默认必跑** | **另一个 Cursor 子 Agent**（非脚本） | 在 **`*_transcript_成稿.md` 已写入磁盘** 之后，主 Agent **必须再启动一个子 Agent**，按 **`docs/transcript_morandi_html/README.md`** 与同目录 **`morandi-template.html`**，生成与成稿同路径、同主文件名的 **`*_transcript_成稿.html`**（莫兰迪单页）。 |
 
 - 主 Agent：跑完 ① 后，**不要**自己在一条回复里塞下全文翻译+总结；应 **启动子 Agent**（若可用 `Task` 工具则并行）分工完成 ②，再合并写入文件。
 - 子 Agent 职责示例：子 Agent 1 = 仅「全文总结」；子 Agent 2～6 = 各管 1/5 节的标题+摘要+译/润色正文。
-- **③**：成稿 `.md` 落盘且用户要网页版时，主 Agent **不要**自己在对话里贴整页 HTML；应 **再启动一个子 Agent**，指令中写明：读 `bilibili-morandi-html` skill、输入为刚写好的成稿路径（或 `@` 文件）。**仓库不提供** `md→html` 的 Python 脚本，HTML 由该子 Agent 按 skill 写出文件即可。
+- **③ 与 ② 衔接**：② 的成稿 `.md` 一完成，**除非用户在本轮对话中明确说只要 Markdown、不要网页**，否则**必须**执行 ③。主 Agent **不要**自己在对话里贴整页 HTML；③ 专由子 Agent 按 **`docs/transcript_morandi_html/`** 指引写文件。**仓库不提供** `md→html` 的 Python 脚本。
 
 ## 何时触发
 
-1. **主触发**：用户发来 **B 站视频链接**（`bilibili.com`、`b23.tv` 或含 `BV`+10 位）。→ 先执行 ①，再执行 ②。
-2. **次触发**：已有 `*_transcript.json`（用户 `@` 文件或提到 `case_outputs` / 成稿）。
+1. **主触发**：用户发来 **B 站视频链接**（`bilibili.com`、`b23.tv` 或含 `BV`+10 位）。→ 先执行 ①，再 ②，再 **默认 ③**（莫兰迪 HTML）。
+2. **次触发**：已有 `*_transcript.json`（用户 `@` 文件或提到 `case_outputs` / 成稿）。→ 从 ② 起；若已有成稿 `.md` 仅缺 HTML，可只跑 **③** 子 Agent（同样读 `docs/transcript_morandi_html/`）。
 
 ### 收到 URL 时的顺序
 
 1. 跑脚本（若尚无 json）：  
    `python -m bilibili_transcript "<URL或BV>" -o case_outputs/<BV号>`
 2. 确认 `case_outputs/<BV号>/<BV>_transcript.json` 存在。
-3. **用子 Agent** 按下文「交付物」生成终稿，**不是**让主对话一次性生成万字画稿。
+3. **用子 Agent** 按下文「交付物」生成终稿 `*_transcript_成稿.md`，**不是**让主对话一次性生成万字画稿。
+4. **默认**：再 **启动子 Agent**，按 **`docs/transcript_morandi_html/README.md`** 与模板生成 **`*_transcript_成稿.html`**。
 
 ## 输入（子 Agent 共用）
 
@@ -38,8 +45,8 @@ description: >-
 
 ## 交付物（子 Agent 合并结果）
 
-- 路径：`<sanitize(标题)>_<bvid>_transcript_成稿.md`（规则同 `bilibili_transcript/text_post.sanitize_filename_title`）。
-- 版式与结构见下节 **「文稿要求」**。
+- **必交**：`<sanitize(标题)>_<bvid>_transcript_成稿.md`（规则同 `bilibili_transcript/text_post.sanitize_filename_title`）；版式与结构见下节 **「文稿要求」**。
+- **默认同路径另交**：`<sanitize(标题)>_<bvid>_transcript_成稿.html`（按 **`docs/transcript_morandi_html/`** 指引生成；用户明确不要网页时可省略）。
 
 ## 文稿要求（终稿必须满足，与仓库 `TRANSCRIPT_STRATEGY.md` 成稿版式对齐）
 
@@ -75,5 +82,5 @@ description: >-
 
 ## 完成后
 
-- 回复用户：成稿路径、是否经子 Agent 并行、译/润色说明。
-- 若用户还要求 **HTML 阅读版**：**启动子 Agent**，使其遵循 **`bilibili-morandi-html`**，产出与成稿同路径、同主文件名的 **`*_transcript_成稿.html`**。
+- 回复用户：**`.md` 与 `.html` 路径**（默认两者都有）、是否经子 Agent 并行、译/润色说明。
+- **默认**已在 ③ 按 `docs/transcript_morandi_html/` 产出 **`*_transcript_成稿.html`**，并已 **自动用浏览器打开**（见该目录 README「交付」）；若本轮跳过 HTML，在回复里说明原因（例如用户声明只要 md）。

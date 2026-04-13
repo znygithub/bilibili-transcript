@@ -1,0 +1,2775 @@
+{
+  "bvid": "BV14jDFBuE9d",
+  "title": "0302巴菲特谈如何学习会计知识",
+  "text": "My name is Johan Freudenberg, I come from Germany.I would like to know the accounting book you like best, thank you.Well, it's been a long time since I've read an accounting book.I read Finney back when I was in college, I remember that.And I always liked accounting,and for any of you interested in business,you know, you basically can't get enough accounting.But I don't, you know, I'm not really up to date on accounting books.Maybe Charlie's been reading some of those lately.I would hope actually that if you read the Berkshire reports over timethat you get certain perhaps lessons on accounting.But I think you learn more accounting probably in terms ofwell, I mean, once you know the basics of it,by reading good business articlesthat deal with accounting issues, accounting scandals, that sort of thing.I mean, that's what you really need to knowis you need to know how the figures are put together,the underlying principles of it.And then you have to know what can be done with those.And you start with the accounting figuresas the raw material of understanding a business.But you have to bring something additional to that.And I can't think of any good books on that subject.I think I've read a lot of good magazine articlesthat contributed to my knowledge over the years.And I've just, you know, I've read a lot of annual reportsand seen what people can do with accounting.And as I've said before, if I don't understand it,I figure it's probably because the management doesn't want me to understand it.And if the management doesn't want me to understand it,there's probably something wrong going on.I mean, people don't obfuscate with numbers.Usually without a purpose.And when you run into that,the best thing to do is just stay away.Charlie?Yeah, asking Warren, you know,what good books he knows about accounting would be...It's like asking him,what good books does he have about breathing?And what the implication of that is,is that you start by learning the basic rules of bookkeeping,which are sort of like the basic rules of addition and subtraction.And then you have to spend a lot of timebefore that accounting gets related to the larger reality.And that's a lifelong process.OK, we're going to try and go to the music call.Number nine, is this working?",
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 4.08,
+      "text": "My name is Johan Freudenberg, I come from Germany.",
+      "words": [
+        {
+          "start": 0.0,
+          "end": 0.36,
+          "word": "My"
+        },
+        {
+          "start": 0.36,
+          "end": 1.22,
+          "word": " name"
+        },
+        {
+          "start": 1.22,
+          "end": 1.52,
+          "word": " is"
+        },
+        {
+          "start": 1.52,
+          "end": 1.84,
+          "word": " Joh"
+        },
+        {
+          "start": 1.84,
+          "end": 2.0,
+          "word": "an"
+        },
+        {
+          "start": 2.0,
+          "end": 2.24,
+          "word": " Fre"
+        },
+        {
+          "start": 2.24,
+          "end": 2.42,
+          "word": "uden"
+        },
+        {
+          "start": 2.42,
+          "end": 2.7,
+          "word": "berg,"
+        },
+        {
+          "start": 2.78,
+          "end": 3.08,
+          "word": " I"
+        },
+        {
+          "start": 3.08,
+          "end": 3.32,
+          "word": " come"
+        },
+        {
+          "start": 3.32,
+          "end": 3.56,
+          "word": " from"
+        },
+        {
+          "start": 3.56,
+          "end": 4.08,
+          "word": " Germany."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 1,
+      "start": 4.2,
+      "end": 9.08,
+      "text": "I would like to know the accounting book you like best, thank you.",
+      "words": [
+        {
+          "start": 4.2,
+          "end": 4.68,
+          "word": "I"
+        },
+        {
+          "start": 4.68,
+          "end": 4.92,
+          "word": " would"
+        },
+        {
+          "start": 4.92,
+          "end": 5.2,
+          "word": " like"
+        },
+        {
+          "start": 5.2,
+          "end": 5.44,
+          "word": " to"
+        },
+        {
+          "start": 5.44,
+          "end": 5.7,
+          "word": " know"
+        },
+        {
+          "start": 5.7,
+          "end": 6.14,
+          "word": " the"
+        },
+        {
+          "start": 6.14,
+          "end": 6.62,
+          "word": " accounting"
+        },
+        {
+          "start": 6.62,
+          "end": 6.98,
+          "word": " book"
+        },
+        {
+          "start": 6.98,
+          "end": 7.22,
+          "word": " you"
+        },
+        {
+          "start": 7.22,
+          "end": 7.5,
+          "word": " like"
+        },
+        {
+          "start": 7.5,
+          "end": 7.9,
+          "word": " best,"
+        },
+        {
+          "start": 8.18,
+          "end": 8.5,
+          "word": " thank"
+        },
+        {
+          "start": 8.5,
+          "end": 9.08,
+          "word": " you."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 2,
+      "start": 12.73,
+      "end": 14.83,
+      "text": "Well, it's been a long time since I've read an accounting book.",
+      "words": [
+        {
+          "start": 12.73,
+          "end": 12.77,
+          "word": "Well,"
+        },
+        {
+          "start": 12.81,
+          "end": 12.91,
+          "word": " it"
+        },
+        {
+          "start": 12.91,
+          "end": 12.91,
+          "word": "'s"
+        },
+        {
+          "start": 12.91,
+          "end": 13.03,
+          "word": " been"
+        },
+        {
+          "start": 13.03,
+          "end": 13.11,
+          "word": " a"
+        },
+        {
+          "start": 13.11,
+          "end": 13.29,
+          "word": " long"
+        },
+        {
+          "start": 13.29,
+          "end": 13.49,
+          "word": " time"
+        },
+        {
+          "start": 13.49,
+          "end": 13.67,
+          "word": " since"
+        },
+        {
+          "start": 13.67,
+          "end": 13.83,
+          "word": " I"
+        },
+        {
+          "start": 13.83,
+          "end": 13.89,
+          "word": "'ve"
+        },
+        {
+          "start": 13.89,
+          "end": 14.01,
+          "word": " read"
+        },
+        {
+          "start": 14.01,
+          "end": 14.23,
+          "word": " an"
+        },
+        {
+          "start": 14.23,
+          "end": 14.55,
+          "word": " accounting"
+        },
+        {
+          "start": 14.55,
+          "end": 14.83,
+          "word": " book."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 3,
+      "start": 14.91,
+      "end": 18.63,
+      "text": "I read Finney back when I was in college, I remember that.",
+      "words": [
+        {
+          "start": 14.91,
+          "end": 15.15,
+          "word": "I"
+        },
+        {
+          "start": 15.15,
+          "end": 15.43,
+          "word": " read"
+        },
+        {
+          "start": 15.43,
+          "end": 15.75,
+          "word": " Fin"
+        },
+        {
+          "start": 15.75,
+          "end": 15.83,
+          "word": "ney"
+        },
+        {
+          "start": 15.83,
+          "end": 16.15,
+          "word": " back"
+        },
+        {
+          "start": 16.15,
+          "end": 16.31,
+          "word": " when"
+        },
+        {
+          "start": 16.31,
+          "end": 16.45,
+          "word": " I"
+        },
+        {
+          "start": 16.45,
+          "end": 16.71,
+          "word": " was"
+        },
+        {
+          "start": 16.71,
+          "end": 17.45,
+          "word": " in"
+        },
+        {
+          "start": 17.45,
+          "end": 17.85,
+          "word": " college,"
+        },
+        {
+          "start": 17.95,
+          "end": 18.07,
+          "word": " I"
+        },
+        {
+          "start": 18.07,
+          "end": 18.35,
+          "word": " remember"
+        },
+        {
+          "start": 18.35,
+          "end": 18.63,
+          "word": " that."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 4,
+      "start": 18.67,
+      "end": 20.05,
+      "text": "And I always liked accounting,",
+      "words": [
+        {
+          "start": 18.67,
+          "end": 18.83,
+          "word": "And"
+        },
+        {
+          "start": 18.83,
+          "end": 19.17,
+          "word": " I"
+        },
+        {
+          "start": 19.17,
+          "end": 19.41,
+          "word": " always"
+        },
+        {
+          "start": 19.41,
+          "end": 19.67,
+          "word": " liked"
+        },
+        {
+          "start": 19.67,
+          "end": 20.05,
+          "word": " accounting,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 5,
+      "start": 20.33,
+      "end": 21.79,
+      "text": "and for any of you interested in business,",
+      "words": [
+        {
+          "start": 20.33,
+          "end": 20.33,
+          "word": "and"
+        },
+        {
+          "start": 20.33,
+          "end": 20.55,
+          "word": " for"
+        },
+        {
+          "start": 20.55,
+          "end": 20.73,
+          "word": " any"
+        },
+        {
+          "start": 20.73,
+          "end": 20.83,
+          "word": " of"
+        },
+        {
+          "start": 20.83,
+          "end": 20.93,
+          "word": " you"
+        },
+        {
+          "start": 20.93,
+          "end": 21.25,
+          "word": " interested"
+        },
+        {
+          "start": 21.25,
+          "end": 21.41,
+          "word": " in"
+        },
+        {
+          "start": 21.41,
+          "end": 21.79,
+          "word": " business,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 6,
+      "start": 22.41,
+      "end": 25.27,
+      "text": "you know, you basically can't get enough accounting.",
+      "words": [
+        {
+          "start": 22.41,
+          "end": 22.69,
+          "word": "you"
+        },
+        {
+          "start": 22.69,
+          "end": 22.69,
+          "word": " know,"
+        },
+        {
+          "start": 22.69,
+          "end": 22.83,
+          "word": " you"
+        },
+        {
+          "start": 22.83,
+          "end": 23.17,
+          "word": " basically"
+        },
+        {
+          "start": 23.17,
+          "end": 23.51,
+          "word": " can"
+        },
+        {
+          "start": 23.51,
+          "end": 23.57,
+          "word": "'t"
+        },
+        {
+          "start": 23.57,
+          "end": 24.35,
+          "word": " get"
+        },
+        {
+          "start": 24.35,
+          "end": 24.81,
+          "word": " enough"
+        },
+        {
+          "start": 24.81,
+          "end": 25.27,
+          "word": " accounting."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 7,
+      "start": 26.81,
+      "end": 31.37,
+      "text": "But I don't, you know, I'm not really up to date on accounting books.",
+      "words": [
+        {
+          "start": 26.81,
+          "end": 27.01,
+          "word": "But"
+        },
+        {
+          "start": 27.01,
+          "end": 27.19,
+          "word": " I"
+        },
+        {
+          "start": 27.19,
+          "end": 27.49,
+          "word": " don"
+        },
+        {
+          "start": 27.49,
+          "end": 27.51,
+          "word": "'t,"
+        },
+        {
+          "start": 27.65,
+          "end": 27.85,
+          "word": " you"
+        },
+        {
+          "start": 27.85,
+          "end": 27.87,
+          "word": " know,"
+        },
+        {
+          "start": 27.87,
+          "end": 28.01,
+          "word": " I"
+        },
+        {
+          "start": 28.01,
+          "end": 28.05,
+          "word": "'m"
+        },
+        {
+          "start": 28.05,
+          "end": 28.25,
+          "word": " not"
+        },
+        {
+          "start": 28.25,
+          "end": 28.53,
+          "word": " really"
+        },
+        {
+          "start": 28.53,
+          "end": 28.73,
+          "word": " up"
+        },
+        {
+          "start": 28.73,
+          "end": 28.93,
+          "word": " to"
+        },
+        {
+          "start": 28.93,
+          "end": 29.55,
+          "word": " date"
+        },
+        {
+          "start": 29.55,
+          "end": 30.73,
+          "word": " on"
+        },
+        {
+          "start": 30.73,
+          "end": 31.13,
+          "word": " accounting"
+        },
+        {
+          "start": 31.13,
+          "end": 31.37,
+          "word": " books."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 8,
+      "start": 31.37,
+      "end": 34.55,
+      "text": "Maybe Charlie's been reading some of those lately.",
+      "words": [
+        {
+          "start": 31.37,
+          "end": 31.67,
+          "word": "Maybe"
+        },
+        {
+          "start": 31.67,
+          "end": 32.05,
+          "word": " Charlie"
+        },
+        {
+          "start": 32.05,
+          "end": 32.17,
+          "word": "'s"
+        },
+        {
+          "start": 32.17,
+          "end": 32.35,
+          "word": " been"
+        },
+        {
+          "start": 32.35,
+          "end": 32.85,
+          "word": " reading"
+        },
+        {
+          "start": 32.85,
+          "end": 33.75,
+          "word": " some"
+        },
+        {
+          "start": 33.75,
+          "end": 33.91,
+          "word": " of"
+        },
+        {
+          "start": 33.91,
+          "end": 34.11,
+          "word": " those"
+        },
+        {
+          "start": 34.11,
+          "end": 34.55,
+          "word": " lately."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 9,
+      "start": 35.87,
+      "end": 39.51,
+      "text": "I would hope actually that if you read the Berkshire reports over time",
+      "words": [
+        {
+          "start": 35.87,
+          "end": 36.35,
+          "word": "I"
+        },
+        {
+          "start": 36.35,
+          "end": 36.61,
+          "word": " would"
+        },
+        {
+          "start": 36.61,
+          "end": 36.87,
+          "word": " hope"
+        },
+        {
+          "start": 36.87,
+          "end": 37.29,
+          "word": " actually"
+        },
+        {
+          "start": 37.29,
+          "end": 37.61,
+          "word": " that"
+        },
+        {
+          "start": 37.61,
+          "end": 37.89,
+          "word": " if"
+        },
+        {
+          "start": 37.89,
+          "end": 38.03,
+          "word": " you"
+        },
+        {
+          "start": 38.03,
+          "end": 38.19,
+          "word": " read"
+        },
+        {
+          "start": 38.19,
+          "end": 38.39,
+          "word": " the"
+        },
+        {
+          "start": 38.39,
+          "end": 38.53,
+          "word": " Ber"
+        },
+        {
+          "start": 38.53,
+          "end": 38.59,
+          "word": "ks"
+        },
+        {
+          "start": 38.59,
+          "end": 38.67,
+          "word": "hire"
+        },
+        {
+          "start": 38.67,
+          "end": 39.05,
+          "word": " reports"
+        },
+        {
+          "start": 39.05,
+          "end": 39.37,
+          "word": " over"
+        },
+        {
+          "start": 39.37,
+          "end": 39.51,
+          "word": " time"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 10,
+      "start": 39.51,
+      "end": 43.23,
+      "text": "that you get certain perhaps lessons on accounting.",
+      "words": [
+        {
+          "start": 39.51,
+          "end": 39.65,
+          "word": "that"
+        },
+        {
+          "start": 39.65,
+          "end": 39.79,
+          "word": " you"
+        },
+        {
+          "start": 39.79,
+          "end": 39.99,
+          "word": " get"
+        },
+        {
+          "start": 39.99,
+          "end": 40.41,
+          "word": " certain"
+        },
+        {
+          "start": 40.41,
+          "end": 40.99,
+          "word": " perhaps"
+        },
+        {
+          "start": 40.99,
+          "end": 41.43,
+          "word": " lessons"
+        },
+        {
+          "start": 41.43,
+          "end": 42.73,
+          "word": " on"
+        },
+        {
+          "start": 42.73,
+          "end": 43.23,
+          "word": " accounting."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 11,
+      "start": 43.37,
+      "end": 47.99,
+      "text": "But I think you learn more accounting probably in terms of",
+      "words": [
+        {
+          "start": 43.37,
+          "end": 43.45,
+          "word": "But"
+        },
+        {
+          "start": 43.45,
+          "end": 43.63,
+          "word": " I"
+        },
+        {
+          "start": 43.63,
+          "end": 43.79,
+          "word": " think"
+        },
+        {
+          "start": 43.79,
+          "end": 44.03,
+          "word": " you"
+        },
+        {
+          "start": 44.03,
+          "end": 44.19,
+          "word": " learn"
+        },
+        {
+          "start": 44.19,
+          "end": 44.45,
+          "word": " more"
+        },
+        {
+          "start": 44.45,
+          "end": 45.01,
+          "word": " accounting"
+        },
+        {
+          "start": 45.01,
+          "end": 46.87,
+          "word": " probably"
+        },
+        {
+          "start": 46.87,
+          "end": 47.15,
+          "word": " in"
+        },
+        {
+          "start": 47.15,
+          "end": 47.41,
+          "word": " terms"
+        },
+        {
+          "start": 47.41,
+          "end": 47.99,
+          "word": " of"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 12,
+      "start": 47.99,
+      "end": 50.05,
+      "text": "well, I mean, once you know the basics of it,",
+      "words": [
+        {
+          "start": 47.99,
+          "end": 48.21,
+          "word": "well,"
+        },
+        {
+          "start": 48.27,
+          "end": 48.27,
+          "word": " I"
+        },
+        {
+          "start": 48.27,
+          "end": 48.37,
+          "word": " mean,"
+        },
+        {
+          "start": 48.39,
+          "end": 48.47,
+          "word": " once"
+        },
+        {
+          "start": 48.47,
+          "end": 48.59,
+          "word": " you"
+        },
+        {
+          "start": 48.59,
+          "end": 48.69,
+          "word": " know"
+        },
+        {
+          "start": 48.69,
+          "end": 48.89,
+          "word": " the"
+        },
+        {
+          "start": 48.89,
+          "end": 49.21,
+          "word": " basics"
+        },
+        {
+          "start": 49.21,
+          "end": 49.45,
+          "word": " of"
+        },
+        {
+          "start": 49.45,
+          "end": 50.05,
+          "word": " it,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 13,
+      "start": 50.47,
+      "end": 52.25,
+      "text": "by reading good business articles",
+      "words": [
+        {
+          "start": 50.47,
+          "end": 50.65,
+          "word": "by"
+        },
+        {
+          "start": 50.65,
+          "end": 51.03,
+          "word": " reading"
+        },
+        {
+          "start": 51.03,
+          "end": 51.31,
+          "word": " good"
+        },
+        {
+          "start": 51.31,
+          "end": 51.71,
+          "word": " business"
+        },
+        {
+          "start": 51.71,
+          "end": 52.25,
+          "word": " articles"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 14,
+      "start": 52.91,
+      "end": 58.45,
+      "text": "that deal with accounting issues, accounting scandals, that sort of thing.",
+      "words": [
+        {
+          "start": 52.91,
+          "end": 53.39,
+          "word": "that"
+        },
+        {
+          "start": 53.39,
+          "end": 53.77,
+          "word": " deal"
+        },
+        {
+          "start": 53.77,
+          "end": 54.99,
+          "word": " with"
+        },
+        {
+          "start": 54.99,
+          "end": 56.15,
+          "word": " accounting"
+        },
+        {
+          "start": 56.15,
+          "end": 56.65,
+          "word": " issues,"
+        },
+        {
+          "start": 56.83,
+          "end": 57.17,
+          "word": " accounting"
+        },
+        {
+          "start": 57.17,
+          "end": 57.57,
+          "word": " scand"
+        },
+        {
+          "start": 57.57,
+          "end": 57.75,
+          "word": "als,"
+        },
+        {
+          "start": 57.83,
+          "end": 57.99,
+          "word": " that"
+        },
+        {
+          "start": 57.99,
+          "end": 58.19,
+          "word": " sort"
+        },
+        {
+          "start": 58.19,
+          "end": 58.35,
+          "word": " of"
+        },
+        {
+          "start": 58.35,
+          "end": 58.45,
+          "word": " thing."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 15,
+      "start": 58.53,
+      "end": 60.43,
+      "text": "I mean, that's what you really need to know",
+      "words": [
+        {
+          "start": 58.53,
+          "end": 58.53,
+          "word": "I"
+        },
+        {
+          "start": 58.53,
+          "end": 58.63,
+          "word": " mean,"
+        },
+        {
+          "start": 58.65,
+          "end": 58.75,
+          "word": " that"
+        },
+        {
+          "start": 58.75,
+          "end": 59.13,
+          "word": "'s"
+        },
+        {
+          "start": 59.13,
+          "end": 59.29,
+          "word": " what"
+        },
+        {
+          "start": 59.29,
+          "end": 59.49,
+          "word": " you"
+        },
+        {
+          "start": 59.49,
+          "end": 59.79,
+          "word": " really"
+        },
+        {
+          "start": 59.79,
+          "end": 59.97,
+          "word": " need"
+        },
+        {
+          "start": 59.97,
+          "end": 60.21,
+          "word": " to"
+        },
+        {
+          "start": 60.21,
+          "end": 60.43,
+          "word": " know"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 16,
+      "start": 60.43,
+      "end": 64.75,
+      "text": "is you need to know how the figures are put together,",
+      "words": [
+        {
+          "start": 60.43,
+          "end": 60.53,
+          "word": "is"
+        },
+        {
+          "start": 60.53,
+          "end": 60.71,
+          "word": " you"
+        },
+        {
+          "start": 60.71,
+          "end": 60.95,
+          "word": " need"
+        },
+        {
+          "start": 60.95,
+          "end": 61.17,
+          "word": " to"
+        },
+        {
+          "start": 61.17,
+          "end": 61.69,
+          "word": " know"
+        },
+        {
+          "start": 61.69,
+          "end": 63.43,
+          "word": " how"
+        },
+        {
+          "start": 63.43,
+          "end": 63.65,
+          "word": " the"
+        },
+        {
+          "start": 63.65,
+          "end": 63.89,
+          "word": " figures"
+        },
+        {
+          "start": 63.89,
+          "end": 64.07,
+          "word": " are"
+        },
+        {
+          "start": 64.07,
+          "end": 64.23,
+          "word": " put"
+        },
+        {
+          "start": 64.23,
+          "end": 64.75,
+          "word": " together,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 17,
+      "start": 66.19,
+      "end": 67.79,
+      "text": "the underlying principles of it.",
+      "words": [
+        {
+          "start": 66.19,
+          "end": 66.35,
+          "word": "the"
+        },
+        {
+          "start": 66.35,
+          "end": 66.87,
+          "word": " underlying"
+        },
+        {
+          "start": 66.87,
+          "end": 67.41,
+          "word": " principles"
+        },
+        {
+          "start": 67.41,
+          "end": 67.65,
+          "word": " of"
+        },
+        {
+          "start": 67.65,
+          "end": 67.79,
+          "word": " it."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 18,
+      "start": 67.79,
+      "end": 70.07,
+      "text": "And then you have to know what can be done with those.",
+      "words": [
+        {
+          "start": 67.79,
+          "end": 68.05,
+          "word": "And"
+        },
+        {
+          "start": 68.05,
+          "end": 68.17,
+          "word": " then"
+        },
+        {
+          "start": 68.17,
+          "end": 68.31,
+          "word": " you"
+        },
+        {
+          "start": 68.31,
+          "end": 68.49,
+          "word": " have"
+        },
+        {
+          "start": 68.49,
+          "end": 68.65,
+          "word": " to"
+        },
+        {
+          "start": 68.65,
+          "end": 68.75,
+          "word": " know"
+        },
+        {
+          "start": 68.75,
+          "end": 68.95,
+          "word": " what"
+        },
+        {
+          "start": 68.95,
+          "end": 69.17,
+          "word": " can"
+        },
+        {
+          "start": 69.17,
+          "end": 69.33,
+          "word": " be"
+        },
+        {
+          "start": 69.33,
+          "end": 69.49,
+          "word": " done"
+        },
+        {
+          "start": 69.49,
+          "end": 69.75,
+          "word": " with"
+        },
+        {
+          "start": 69.75,
+          "end": 70.07,
+          "word": " those."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 19,
+      "start": 70.89,
+      "end": 74.03,
+      "text": "And you start with the accounting figures",
+      "words": [
+        {
+          "start": 70.89,
+          "end": 70.89,
+          "word": "And"
+        },
+        {
+          "start": 70.89,
+          "end": 72.23,
+          "word": " you"
+        },
+        {
+          "start": 72.23,
+          "end": 72.61,
+          "word": " start"
+        },
+        {
+          "start": 72.61,
+          "end": 73.25,
+          "word": " with"
+        },
+        {
+          "start": 73.25,
+          "end": 73.45,
+          "word": " the"
+        },
+        {
+          "start": 73.45,
+          "end": 73.67,
+          "word": " accounting"
+        },
+        {
+          "start": 73.67,
+          "end": 74.03,
+          "word": " figures"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 20,
+      "start": 74.03,
+      "end": 76.41,
+      "text": "as the raw material of understanding a business.",
+      "words": [
+        {
+          "start": 74.03,
+          "end": 74.23,
+          "word": "as"
+        },
+        {
+          "start": 74.23,
+          "end": 74.43,
+          "word": " the"
+        },
+        {
+          "start": 74.43,
+          "end": 74.57,
+          "word": " raw"
+        },
+        {
+          "start": 74.57,
+          "end": 75.17,
+          "word": " material"
+        },
+        {
+          "start": 75.17,
+          "end": 75.43,
+          "word": " of"
+        },
+        {
+          "start": 75.43,
+          "end": 75.97,
+          "word": " understanding"
+        },
+        {
+          "start": 75.97,
+          "end": 76.19,
+          "word": " a"
+        },
+        {
+          "start": 76.19,
+          "end": 76.41,
+          "word": " business."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 21,
+      "start": 76.49,
+      "end": 78.67,
+      "text": "But you have to bring something additional to that.",
+      "words": [
+        {
+          "start": 76.49,
+          "end": 76.61,
+          "word": "But"
+        },
+        {
+          "start": 76.61,
+          "end": 76.73,
+          "word": " you"
+        },
+        {
+          "start": 76.73,
+          "end": 76.91,
+          "word": " have"
+        },
+        {
+          "start": 76.91,
+          "end": 77.09,
+          "word": " to"
+        },
+        {
+          "start": 77.09,
+          "end": 77.21,
+          "word": " bring"
+        },
+        {
+          "start": 77.21,
+          "end": 77.61,
+          "word": " something"
+        },
+        {
+          "start": 77.61,
+          "end": 78.09,
+          "word": " additional"
+        },
+        {
+          "start": 78.09,
+          "end": 78.33,
+          "word": " to"
+        },
+        {
+          "start": 78.33,
+          "end": 78.67,
+          "word": " that."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 22,
+      "start": 79.75,
+      "end": 82.47,
+      "text": "And I can't think of any good books on that subject.",
+      "words": [
+        {
+          "start": 79.75,
+          "end": 79.95,
+          "word": "And"
+        },
+        {
+          "start": 79.95,
+          "end": 80.07,
+          "word": " I"
+        },
+        {
+          "start": 80.07,
+          "end": 80.27,
+          "word": " can"
+        },
+        {
+          "start": 80.27,
+          "end": 80.29,
+          "word": "'t"
+        },
+        {
+          "start": 80.29,
+          "end": 80.45,
+          "word": " think"
+        },
+        {
+          "start": 80.45,
+          "end": 80.57,
+          "word": " of"
+        },
+        {
+          "start": 80.57,
+          "end": 80.77,
+          "word": " any"
+        },
+        {
+          "start": 80.77,
+          "end": 81.01,
+          "word": " good"
+        },
+        {
+          "start": 81.01,
+          "end": 81.43,
+          "word": " books"
+        },
+        {
+          "start": 81.43,
+          "end": 82.05,
+          "word": " on"
+        },
+        {
+          "start": 82.05,
+          "end": 82.25,
+          "word": " that"
+        },
+        {
+          "start": 82.25,
+          "end": 82.47,
+          "word": " subject."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 23,
+      "start": 82.59,
+      "end": 84.77,
+      "text": "I think I've read a lot of good magazine articles",
+      "words": [
+        {
+          "start": 82.59,
+          "end": 82.65,
+          "word": "I"
+        },
+        {
+          "start": 82.65,
+          "end": 82.85,
+          "word": " think"
+        },
+        {
+          "start": 82.85,
+          "end": 82.99,
+          "word": " I"
+        },
+        {
+          "start": 82.99,
+          "end": 83.07,
+          "word": "'ve"
+        },
+        {
+          "start": 83.07,
+          "end": 83.15,
+          "word": " read"
+        },
+        {
+          "start": 83.15,
+          "end": 83.27,
+          "word": " a"
+        },
+        {
+          "start": 83.27,
+          "end": 83.39,
+          "word": " lot"
+        },
+        {
+          "start": 83.39,
+          "end": 83.49,
+          "word": " of"
+        },
+        {
+          "start": 83.49,
+          "end": 83.69,
+          "word": " good"
+        },
+        {
+          "start": 83.69,
+          "end": 84.09,
+          "word": " magazine"
+        },
+        {
+          "start": 84.09,
+          "end": 84.77,
+          "word": " articles"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 24,
+      "start": 85.57,
+      "end": 87.99,
+      "text": "that contributed to my knowledge over the years.",
+      "words": [
+        {
+          "start": 85.57,
+          "end": 86.01,
+          "word": "that"
+        },
+        {
+          "start": 86.01,
+          "end": 86.45,
+          "word": " contributed"
+        },
+        {
+          "start": 86.45,
+          "end": 86.67,
+          "word": " to"
+        },
+        {
+          "start": 86.67,
+          "end": 86.85,
+          "word": " my"
+        },
+        {
+          "start": 86.85,
+          "end": 87.17,
+          "word": " knowledge"
+        },
+        {
+          "start": 87.17,
+          "end": 87.45,
+          "word": " over"
+        },
+        {
+          "start": 87.45,
+          "end": 87.67,
+          "word": " the"
+        },
+        {
+          "start": 87.67,
+          "end": 87.99,
+          "word": " years."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 25,
+      "start": 87.99,
+      "end": 91.99,
+      "text": "And I've just, you know, I've read a lot of annual reports",
+      "words": [
+        {
+          "start": 87.99,
+          "end": 87.99,
+          "word": "And"
+        },
+        {
+          "start": 87.99,
+          "end": 88.97,
+          "word": " I"
+        },
+        {
+          "start": 88.97,
+          "end": 89.09,
+          "word": "'ve"
+        },
+        {
+          "start": 89.09,
+          "end": 89.37,
+          "word": " just,"
+        },
+        {
+          "start": 89.37,
+          "end": 90.39,
+          "word": " you"
+        },
+        {
+          "start": 90.39,
+          "end": 90.53,
+          "word": " know,"
+        },
+        {
+          "start": 90.59,
+          "end": 90.63,
+          "word": " I"
+        },
+        {
+          "start": 90.63,
+          "end": 90.73,
+          "word": "'ve"
+        },
+        {
+          "start": 90.73,
+          "end": 90.81,
+          "word": " read"
+        },
+        {
+          "start": 90.81,
+          "end": 90.89,
+          "word": " a"
+        },
+        {
+          "start": 90.89,
+          "end": 91.07,
+          "word": " lot"
+        },
+        {
+          "start": 91.07,
+          "end": 91.23,
+          "word": " of"
+        },
+        {
+          "start": 91.23,
+          "end": 91.41,
+          "word": " annual"
+        },
+        {
+          "start": 91.41,
+          "end": 91.99,
+          "word": " reports"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 26,
+      "start": 93.79,
+      "end": 98.17,
+      "text": "and seen what people can do with accounting.",
+      "words": [
+        {
+          "start": 93.79,
+          "end": 94.35,
+          "word": "and"
+        },
+        {
+          "start": 94.35,
+          "end": 94.91,
+          "word": " seen"
+        },
+        {
+          "start": 94.91,
+          "end": 95.15,
+          "word": " what"
+        },
+        {
+          "start": 95.15,
+          "end": 95.51,
+          "word": " people"
+        },
+        {
+          "start": 95.51,
+          "end": 95.81,
+          "word": " can"
+        },
+        {
+          "start": 95.81,
+          "end": 96.53,
+          "word": " do"
+        },
+        {
+          "start": 96.53,
+          "end": 97.69,
+          "word": " with"
+        },
+        {
+          "start": 97.69,
+          "end": 98.17,
+          "word": " accounting."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 27,
+      "start": 98.73,
+      "end": 102.05,
+      "text": "And as I've said before, if I don't understand it,",
+      "words": [
+        {
+          "start": 98.73,
+          "end": 98.87,
+          "word": "And"
+        },
+        {
+          "start": 98.87,
+          "end": 99.29,
+          "word": " as"
+        },
+        {
+          "start": 99.29,
+          "end": 99.43,
+          "word": " I"
+        },
+        {
+          "start": 99.43,
+          "end": 99.53,
+          "word": "'ve"
+        },
+        {
+          "start": 99.53,
+          "end": 99.65,
+          "word": " said"
+        },
+        {
+          "start": 99.65,
+          "end": 100.17,
+          "word": " before,"
+        },
+        {
+          "start": 100.57,
+          "end": 100.73,
+          "word": " if"
+        },
+        {
+          "start": 100.73,
+          "end": 100.91,
+          "word": " I"
+        },
+        {
+          "start": 100.91,
+          "end": 101.11,
+          "word": " don"
+        },
+        {
+          "start": 101.11,
+          "end": 101.11,
+          "word": "'t"
+        },
+        {
+          "start": 101.11,
+          "end": 101.61,
+          "word": " understand"
+        },
+        {
+          "start": 101.61,
+          "end": 102.05,
+          "word": " it,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 28,
+      "start": 102.25,
+      "end": 106.37,
+      "text": "I figure it's probably because the management doesn't want me to understand it.",
+      "words": [
+        {
+          "start": 102.25,
+          "end": 102.49,
+          "word": "I"
+        },
+        {
+          "start": 102.49,
+          "end": 102.79,
+          "word": " figure"
+        },
+        {
+          "start": 102.79,
+          "end": 103.41,
+          "word": " it"
+        },
+        {
+          "start": 103.41,
+          "end": 103.57,
+          "word": "'s"
+        },
+        {
+          "start": 103.57,
+          "end": 103.91,
+          "word": " probably"
+        },
+        {
+          "start": 103.91,
+          "end": 104.27,
+          "word": " because"
+        },
+        {
+          "start": 104.27,
+          "end": 104.47,
+          "word": " the"
+        },
+        {
+          "start": 104.47,
+          "end": 104.75,
+          "word": " management"
+        },
+        {
+          "start": 104.75,
+          "end": 105.03,
+          "word": " doesn"
+        },
+        {
+          "start": 105.03,
+          "end": 105.03,
+          "word": "'t"
+        },
+        {
+          "start": 105.03,
+          "end": 105.25,
+          "word": " want"
+        },
+        {
+          "start": 105.25,
+          "end": 105.39,
+          "word": " me"
+        },
+        {
+          "start": 105.39,
+          "end": 105.53,
+          "word": " to"
+        },
+        {
+          "start": 105.53,
+          "end": 105.85,
+          "word": " understand"
+        },
+        {
+          "start": 105.85,
+          "end": 106.37,
+          "word": " it."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 29,
+      "start": 106.55,
+      "end": 108.93,
+      "text": "And if the management doesn't want me to understand it,",
+      "words": [
+        {
+          "start": 106.55,
+          "end": 106.73,
+          "word": "And"
+        },
+        {
+          "start": 106.73,
+          "end": 106.87,
+          "word": " if"
+        },
+        {
+          "start": 106.87,
+          "end": 107.01,
+          "word": " the"
+        },
+        {
+          "start": 107.01,
+          "end": 107.25,
+          "word": " management"
+        },
+        {
+          "start": 107.25,
+          "end": 107.53,
+          "word": " doesn"
+        },
+        {
+          "start": 107.53,
+          "end": 107.53,
+          "word": "'t"
+        },
+        {
+          "start": 107.53,
+          "end": 107.77,
+          "word": " want"
+        },
+        {
+          "start": 107.77,
+          "end": 107.93,
+          "word": " me"
+        },
+        {
+          "start": 107.93,
+          "end": 108.05,
+          "word": " to"
+        },
+        {
+          "start": 108.05,
+          "end": 108.41,
+          "word": " understand"
+        },
+        {
+          "start": 108.41,
+          "end": 108.93,
+          "word": " it,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 30,
+      "start": 109.39,
+      "end": 111.37,
+      "text": "there's probably something wrong going on.",
+      "words": [
+        {
+          "start": 109.39,
+          "end": 109.71,
+          "word": "there"
+        },
+        {
+          "start": 109.71,
+          "end": 109.79,
+          "word": "'s"
+        },
+        {
+          "start": 109.79,
+          "end": 110.15,
+          "word": " probably"
+        },
+        {
+          "start": 110.15,
+          "end": 110.49,
+          "word": " something"
+        },
+        {
+          "start": 110.49,
+          "end": 110.77,
+          "word": " wrong"
+        },
+        {
+          "start": 110.77,
+          "end": 111.03,
+          "word": " going"
+        },
+        {
+          "start": 111.03,
+          "end": 111.37,
+          "word": " on."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 31,
+      "start": 111.49,
+      "end": 117.11,
+      "text": "I mean, people don't obfuscate with numbers.",
+      "words": [
+        {
+          "start": 111.49,
+          "end": 111.51,
+          "word": "I"
+        },
+        {
+          "start": 111.51,
+          "end": 111.79,
+          "word": " mean,"
+        },
+        {
+          "start": 112.29,
+          "end": 112.75,
+          "word": " people"
+        },
+        {
+          "start": 112.75,
+          "end": 113.29,
+          "word": " don"
+        },
+        {
+          "start": 113.29,
+          "end": 114.33,
+          "word": "'t"
+        },
+        {
+          "start": 114.33,
+          "end": 114.79,
+          "word": " ob"
+        },
+        {
+          "start": 114.79,
+          "end": 115.01,
+          "word": "f"
+        },
+        {
+          "start": 115.01,
+          "end": 115.09,
+          "word": "usc"
+        },
+        {
+          "start": 115.09,
+          "end": 115.87,
+          "word": "ate"
+        },
+        {
+          "start": 115.87,
+          "end": 116.49,
+          "word": " with"
+        },
+        {
+          "start": 116.49,
+          "end": 117.11,
+          "word": " numbers."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 32,
+      "start": 117.11,
+      "end": 119.35,
+      "text": "Usually without a purpose.",
+      "words": [
+        {
+          "start": 117.11,
+          "end": 117.11,
+          "word": "Us"
+        },
+        {
+          "start": 117.11,
+          "end": 118.37,
+          "word": "ually"
+        },
+        {
+          "start": 118.37,
+          "end": 118.71,
+          "word": " without"
+        },
+        {
+          "start": 118.71,
+          "end": 118.97,
+          "word": " a"
+        },
+        {
+          "start": 118.97,
+          "end": 119.35,
+          "word": " purpose."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 33,
+      "start": 120.67,
+      "end": 122.09,
+      "text": "And when you run into that,",
+      "words": [
+        {
+          "start": 120.67,
+          "end": 120.67,
+          "word": "And"
+        },
+        {
+          "start": 120.67,
+          "end": 121.31,
+          "word": " when"
+        },
+        {
+          "start": 121.31,
+          "end": 121.47,
+          "word": " you"
+        },
+        {
+          "start": 121.47,
+          "end": 121.67,
+          "word": " run"
+        },
+        {
+          "start": 121.67,
+          "end": 121.87,
+          "word": " into"
+        },
+        {
+          "start": 121.87,
+          "end": 122.09,
+          "word": " that,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 34,
+      "start": 122.17,
+      "end": 123.79,
+      "text": "the best thing to do is just stay away.",
+      "words": [
+        {
+          "start": 122.17,
+          "end": 122.23,
+          "word": "the"
+        },
+        {
+          "start": 122.23,
+          "end": 122.41,
+          "word": " best"
+        },
+        {
+          "start": 122.41,
+          "end": 122.59,
+          "word": " thing"
+        },
+        {
+          "start": 122.59,
+          "end": 122.65,
+          "word": " to"
+        },
+        {
+          "start": 122.65,
+          "end": 122.79,
+          "word": " do"
+        },
+        {
+          "start": 122.79,
+          "end": 122.89,
+          "word": " is"
+        },
+        {
+          "start": 122.89,
+          "end": 123.09,
+          "word": " just"
+        },
+        {
+          "start": 123.09,
+          "end": 123.31,
+          "word": " stay"
+        },
+        {
+          "start": 123.31,
+          "end": 123.79,
+          "word": " away."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 35,
+      "start": 124.33,
+      "end": 125.21,
+      "text": "Charlie?",
+      "words": [
+        {
+          "start": 124.33,
+          "end": 124.59,
+          "word": "Char"
+        },
+        {
+          "start": 124.59,
+          "end": 125.21,
+          "word": "lie?"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 36,
+      "start": 126.09,
+      "end": 130.29,
+      "text": "Yeah, asking Warren, you know,",
+      "words": [
+        {
+          "start": 126.09,
+          "end": 126.61,
+          "word": "Yeah,"
+        },
+        {
+          "start": 126.61,
+          "end": 127.13,
+          "word": " asking"
+        },
+        {
+          "start": 127.13,
+          "end": 128.37,
+          "word": " Warren,"
+        },
+        {
+          "start": 129.89,
+          "end": 130.07,
+          "word": " you"
+        },
+        {
+          "start": 130.07,
+          "end": 130.29,
+          "word": " know,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 37,
+      "start": 130.29,
+      "end": 133.11,
+      "text": "what good books he knows about accounting would be...",
+      "words": [
+        {
+          "start": 130.29,
+          "end": 130.53,
+          "word": "what"
+        },
+        {
+          "start": 130.53,
+          "end": 130.83,
+          "word": " good"
+        },
+        {
+          "start": 130.83,
+          "end": 131.13,
+          "word": " books"
+        },
+        {
+          "start": 131.13,
+          "end": 131.33,
+          "word": " he"
+        },
+        {
+          "start": 131.33,
+          "end": 131.57,
+          "word": " knows"
+        },
+        {
+          "start": 131.57,
+          "end": 131.89,
+          "word": " about"
+        },
+        {
+          "start": 131.89,
+          "end": 132.31,
+          "word": " accounting"
+        },
+        {
+          "start": 132.31,
+          "end": 132.57,
+          "word": " would"
+        },
+        {
+          "start": 132.57,
+          "end": 132.71,
+          "word": " be"
+        },
+        {
+          "start": 132.71,
+          "end": 133.11,
+          "word": "..."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 38,
+      "start": 133.11,
+      "end": 134.43,
+      "text": "It's like asking him,",
+      "words": [
+        {
+          "start": 133.11,
+          "end": 133.35,
+          "word": "It"
+        },
+        {
+          "start": 133.35,
+          "end": 133.43,
+          "word": "'s"
+        },
+        {
+          "start": 133.43,
+          "end": 133.61,
+          "word": " like"
+        },
+        {
+          "start": 133.61,
+          "end": 133.95,
+          "word": " asking"
+        },
+        {
+          "start": 133.95,
+          "end": 134.43,
+          "word": " him,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 39,
+      "start": 134.63,
+      "end": 136.89,
+      "text": "what good books does he have about breathing?",
+      "words": [
+        {
+          "start": 134.63,
+          "end": 134.85,
+          "word": "what"
+        },
+        {
+          "start": 134.85,
+          "end": 135.09,
+          "word": " good"
+        },
+        {
+          "start": 135.09,
+          "end": 135.35,
+          "word": " books"
+        },
+        {
+          "start": 135.35,
+          "end": 135.57,
+          "word": " does"
+        },
+        {
+          "start": 135.57,
+          "end": 135.73,
+          "word": " he"
+        },
+        {
+          "start": 135.73,
+          "end": 135.93,
+          "word": " have"
+        },
+        {
+          "start": 135.93,
+          "end": 136.35,
+          "word": " about"
+        },
+        {
+          "start": 136.35,
+          "end": 136.89,
+          "word": " breathing?"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 40,
+      "start": 140.51,
+      "end": 147.89,
+      "text": "And what the implication of that is,",
+      "words": [
+        {
+          "start": 140.51,
+          "end": 141.03,
+          "word": "And"
+        },
+        {
+          "start": 145.57,
+          "end": 146.09,
+          "word": " what"
+        },
+        {
+          "start": 146.09,
+          "end": 146.33,
+          "word": " the"
+        },
+        {
+          "start": 146.33,
+          "end": 146.81,
+          "word": " implication"
+        },
+        {
+          "start": 146.81,
+          "end": 147.09,
+          "word": " of"
+        },
+        {
+          "start": 147.09,
+          "end": 147.33,
+          "word": " that"
+        },
+        {
+          "start": 147.33,
+          "end": 147.89,
+          "word": " is,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 41,
+      "start": 148.67,
+      "end": 152.79,
+      "text": "is that you start by learning the basic rules of bookkeeping,",
+      "words": [
+        {
+          "start": 148.67,
+          "end": 149.19,
+          "word": "is"
+        },
+        {
+          "start": 149.19,
+          "end": 149.61,
+          "word": " that"
+        },
+        {
+          "start": 149.61,
+          "end": 149.85,
+          "word": " you"
+        },
+        {
+          "start": 149.85,
+          "end": 150.13,
+          "word": " start"
+        },
+        {
+          "start": 150.13,
+          "end": 150.33,
+          "word": " by"
+        },
+        {
+          "start": 150.33,
+          "end": 150.69,
+          "word": " learning"
+        },
+        {
+          "start": 150.69,
+          "end": 151.53,
+          "word": " the"
+        },
+        {
+          "start": 151.53,
+          "end": 151.83,
+          "word": " basic"
+        },
+        {
+          "start": 151.83,
+          "end": 152.09,
+          "word": " rules"
+        },
+        {
+          "start": 152.09,
+          "end": 152.25,
+          "word": " of"
+        },
+        {
+          "start": 152.25,
+          "end": 152.49,
+          "word": " book"
+        },
+        {
+          "start": 152.49,
+          "end": 152.79,
+          "word": "keeping,"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 42,
+      "start": 152.79,
+      "end": 156.43,
+      "text": "which are sort of like the basic rules of addition and subtraction.",
+      "words": [
+        {
+          "start": 152.79,
+          "end": 152.95,
+          "word": "which"
+        },
+        {
+          "start": 152.95,
+          "end": 153.25,
+          "word": " are"
+        },
+        {
+          "start": 153.25,
+          "end": 153.39,
+          "word": " sort"
+        },
+        {
+          "start": 153.39,
+          "end": 153.53,
+          "word": " of"
+        },
+        {
+          "start": 153.53,
+          "end": 153.65,
+          "word": " like"
+        },
+        {
+          "start": 153.65,
+          "end": 153.81,
+          "word": " the"
+        },
+        {
+          "start": 153.81,
+          "end": 154.01,
+          "word": " basic"
+        },
+        {
+          "start": 154.01,
+          "end": 154.27,
+          "word": " rules"
+        },
+        {
+          "start": 154.27,
+          "end": 154.47,
+          "word": " of"
+        },
+        {
+          "start": 154.47,
+          "end": 154.83,
+          "word": " addition"
+        },
+        {
+          "start": 154.83,
+          "end": 155.11,
+          "word": " and"
+        },
+        {
+          "start": 155.11,
+          "end": 155.53,
+          "word": " subtract"
+        },
+        {
+          "start": 155.53,
+          "end": 156.43,
+          "word": "ion."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 43,
+      "start": 156.47,
+      "end": 161.19,
+      "text": "And then you have to spend a lot of time",
+      "words": [
+        {
+          "start": 156.47,
+          "end": 156.97,
+          "word": "And"
+        },
+        {
+          "start": 156.97,
+          "end": 158.23,
+          "word": " then"
+        },
+        {
+          "start": 158.23,
+          "end": 158.55,
+          "word": " you"
+        },
+        {
+          "start": 158.55,
+          "end": 158.73,
+          "word": " have"
+        },
+        {
+          "start": 158.73,
+          "end": 158.87,
+          "word": " to"
+        },
+        {
+          "start": 158.87,
+          "end": 159.11,
+          "word": " spend"
+        },
+        {
+          "start": 159.11,
+          "end": 160.23,
+          "word": " a"
+        },
+        {
+          "start": 160.23,
+          "end": 160.59,
+          "word": " lot"
+        },
+        {
+          "start": 160.59,
+          "end": 160.87,
+          "word": " of"
+        },
+        {
+          "start": 160.87,
+          "end": 161.19,
+          "word": " time"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 44,
+      "start": 161.19,
+      "end": 164.65,
+      "text": "before that accounting gets related to the larger reality.",
+      "words": [
+        {
+          "start": 161.19,
+          "end": 161.53,
+          "word": "before"
+        },
+        {
+          "start": 161.53,
+          "end": 161.81,
+          "word": " that"
+        },
+        {
+          "start": 161.81,
+          "end": 162.29,
+          "word": " accounting"
+        },
+        {
+          "start": 162.29,
+          "end": 162.91,
+          "word": " gets"
+        },
+        {
+          "start": 162.91,
+          "end": 163.35,
+          "word": " related"
+        },
+        {
+          "start": 163.35,
+          "end": 163.57,
+          "word": " to"
+        },
+        {
+          "start": 163.57,
+          "end": 163.77,
+          "word": " the"
+        },
+        {
+          "start": 163.77,
+          "end": 164.05,
+          "word": " larger"
+        },
+        {
+          "start": 164.05,
+          "end": 164.65,
+          "word": " reality."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 45,
+      "start": 165.11,
+      "end": 167.03,
+      "text": "And that's a lifelong process.",
+      "words": [
+        {
+          "start": 165.11,
+          "end": 165.45,
+          "word": "And"
+        },
+        {
+          "start": 165.45,
+          "end": 165.65,
+          "word": " that"
+        },
+        {
+          "start": 165.65,
+          "end": 165.95,
+          "word": "'s"
+        },
+        {
+          "start": 165.95,
+          "end": 166.11,
+          "word": " a"
+        },
+        {
+          "start": 166.11,
+          "end": 166.37,
+          "word": " lifelong"
+        },
+        {
+          "start": 166.37,
+          "end": 167.03,
+          "word": " process."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 46,
+      "start": 169.95,
+      "end": 171.69,
+      "text": "OK, we're going to try and go to the music call.",
+      "words": [
+        {
+          "start": 169.95,
+          "end": 170.21,
+          "word": "OK,"
+        },
+        {
+          "start": 170.27,
+          "end": 170.35,
+          "word": " we"
+        },
+        {
+          "start": 170.35,
+          "end": 170.41,
+          "word": "'re"
+        },
+        {
+          "start": 170.41,
+          "end": 170.49,
+          "word": " going"
+        },
+        {
+          "start": 170.49,
+          "end": 170.59,
+          "word": " to"
+        },
+        {
+          "start": 170.59,
+          "end": 170.71,
+          "word": " try"
+        },
+        {
+          "start": 170.71,
+          "end": 170.77,
+          "word": " and"
+        },
+        {
+          "start": 170.77,
+          "end": 170.87,
+          "word": " go"
+        },
+        {
+          "start": 170.87,
+          "end": 170.99,
+          "word": " to"
+        },
+        {
+          "start": 170.99,
+          "end": 171.11,
+          "word": " the"
+        },
+        {
+          "start": 171.11,
+          "end": 171.35,
+          "word": " music"
+        },
+        {
+          "start": 171.35,
+          "end": 171.69,
+          "word": " call."
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    },
+    {
+      "id": 47,
+      "start": 171.87,
+      "end": 173.03,
+      "text": "Number nine, is this working?",
+      "words": [
+        {
+          "start": 171.87,
+          "end": 172.01,
+          "word": "N"
+        },
+        {
+          "start": 172.01,
+          "end": 172.13,
+          "word": "umber"
+        },
+        {
+          "start": 172.13,
+          "end": 172.41,
+          "word": " nine,"
+        },
+        {
+          "start": 172.53,
+          "end": 172.59,
+          "word": " is"
+        },
+        {
+          "start": 172.59,
+          "end": 172.77,
+          "word": " this"
+        },
+        {
+          "start": 172.77,
+          "end": 173.03,
+          "word": " working?"
+        }
+      ],
+      "part": 1,
+      "text_source": null
+    }
+  ],
+  "part_sources": [
+    {
+      "part": 1,
+      "mode": "asr",
+      "whisper_model": "medium"
+    }
+  ],
+  "transcript_strategy": "优先使用 B 站官方 CC（WBI /player/wbi/v2 + subtitle_url）；若无则可在提供浏览器 Cookie 时用 yt-dlp 拉取字幕文件；仍无则本机 faster-whisper ASR。详见 TRANSCRIPT_STRATEGY.md。"
+}
