@@ -24,7 +24,7 @@
 | 默认（能抓 CC 就不 ASR）       | 无额外参数                                                |
 | 只要 ASR、不尝试字幕           | `--force-asr`                                        |
 | 完全不要字幕尝试               | `--no-prefer-subtitles`（与 `--force-asr` 类似，仍走下载+ASR） |
-| 登录用户字幕在网页有、接口无         | `--cookies-from-browser chrome`                      |
+| 登录用户字幕在网页有、接口无         | `--cookies-from-browser chrome`（注入官方 `wbi/v2` + yt-dlp；需 `pip install browser-cookie3`） |
 | 官方无 CC 时仍尝试 yt-dlp 拉文件 | `--ytdlp-subs`（常需配合 Cookie 才有真 CC）                   |
 
 
@@ -35,6 +35,8 @@
 ## 成稿版式（与「硅谷 101」类对谈稿对齐）
 
 **终稿完整文稿要求**（含子 Agent 执行清单）以项目 Skill 为准： [`.cursor/skills/bilibili-transcript-finalize/SKILL.md`](.cursor/skills/bilibili-transcript-finalize/SKILL.md) 中的 **「文稿要求」** 一节。
+
+**分工**：去口癖、标点、分段、换行、翻译等**一律由 Cursor 子 Agent** 在成稿阶段完成；Python 流水线**不得**用语义规则或脚本替代（见该 Skill **「禁止：用 Python 脚本处理终稿正文」** 与 **Gotcha**）。
 
 流水线生成的 `*_transcript.md` 是**占位草稿**，结构约定为：
 

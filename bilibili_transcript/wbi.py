@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 import time
 import urllib.parse
 from typing import Any, Dict, Optional
@@ -10,6 +11,8 @@ from typing import Any, Dict, Optional
 import requests
 
 from bilibili_transcript.download import DEFAULT_UA
+
+logger = logging.getLogger(__name__)
 
 _WBI_KEY: Optional[str] = None
 _WBI_TS: float = 0.0
@@ -71,4 +74,49 @@ def session_with_headers(bvid: str) -> requests.Session:
             "Referer": f"https://www.bilibili.com/video/{bvid}",
         }
     )
+    return s
+
+
+def session_with_browser_cookies(bvid: str, browser: Optional[str]) -> requests.Session:
+    """
+    在 session_with_headers 基础上注入本机浏览器里 bilibili.com 的 Cookie，
+    使 x/player/wbi/v2 在「需登录才返回字幕」的稿件上与网页行为一致。
+    """
+    s = session_with_headers(bvid)
+    if not browser or not str(browser).strip():
+        return s
+    try:
+        import browser_cookie3
+    except ImportError:
+        logger.warning(
+            "已指定 --cookies-from-browser，但未安装 browser-cookie3，"
+            "无法向官方字幕接口注入登录态。请执行: pip install browser-cookie3"
+        )
+        return s
+    name = str(browser).strip().lower()
+    loaders: Dict[str, Any] = {
+        "chrome": browser_cookie3.chrome,
+        "chromium": browser_cookie3.chromium,
+        "brave": browser_cookie3.brave,
+        "edge": browser_cookie3.edge,
+        "firefox": browser_cookie3.firefox,
+        "safari": browser_cookie3.safari,
+        "opera": browser_cookie3.opera,
+    }
+    if hasattr(browser_cookie3, "vivaldi"):
+        loaders["vivaldi"] = browser_cookie3.vivaldi  # type: ignore[attr-defined]
+    loader = loaders.get(name)
+    if loader is None:
+        logger.warning(
+            "不支持的浏览器名: %s（可选: %s）",
+            name,
+            ", ".join(sorted(loaders)),
+        )
+        return s
+    try:
+        cj = loader(domain_name="bilibili.com")
+        s.cookies.update(cj)
+        logger.info("已从本机 %s 注入 bilibili.com Cookie（用于官方字幕接口）。", name)
+    except Exception as e:
+        logger.warning("读取浏览器 Cookie 失败（官方字幕可能仍为空）: %s", e)
     return s

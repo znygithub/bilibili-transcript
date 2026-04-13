@@ -11,9 +11,12 @@
 
 ## 分工（谁跑）
 
-- **本仓库不提供** `md → html` 的 Python/CLI 脚本；转换由 **Cursor 子 Agent** 执行（主 Agent 在成稿 `.md` 就绪后 **启动子 Agent**，让其阅读 **本 README** 与 **`morandi-template.html`** 并写入 `.html`）。
+- **推荐（稳定产出）**：成稿 `.md` 定稿后，运行 **`tools/export_morandi_html.py`**（仓库根目录，**仅**把 Markdown 映射到 `morandi-template.html` 的结构并做 HTML 转义，**不参与**去口癖、标点等正文处理）。示例：  
+  `python tools/export_morandi_html.py case_outputs/BV1xxxx_p1/段永平…_transcript_成稿.md`
+- **备选**：由 **Cursor 子 Agent** 阅读 **本 README** 与 **`morandi-template.html`** 手写写入 `.html`（适合需微调版式的个案）。
 - 子 Agent 与「翻译/总结成稿」子 Agent **分开**：避免单条对话塞超长 HTML；HTML 专由本子任务负责。
 - **B 站链接主流程**：`bilibili-transcript-finalize` 规定 **默认**在 ② 完成后**总是**再跑阶段③（除非用户明确只要 md）。
+- 阶段 **②** 成稿 `.md` 的正文润色（去口癖、标点、分段、换行等）由 **Cursor 子 Agent** 完成，见同一 Skill；**不用** Python 脚本对逐字稿做语义级处理。
 
 ## 在项目中的位置
 

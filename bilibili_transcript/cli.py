@@ -76,7 +76,9 @@ def obtain_part_segments(
     page_url = video_page_url_part(bvid, part_index)
 
     if not args.force_asr and args.prefer_subtitles:
-        off = try_fetch_official_segments(bvid, cid, aid)
+        off = try_fetch_official_segments(
+            bvid, cid, aid, cookies_from_browser=args.cookies_from_browser
+        )
         if off:
             segs, full, meta = off
             return segs, full, {
@@ -251,7 +253,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--cookies-from-browser",
         default=None,
         metavar="BROWSER",
-        help="传给 yt-dlp：下载音轨或**拉取需登录的字幕**时使用，例如 chrome",
+        help="从本机浏览器读取 bilibili Cookie：注入官方字幕接口（需 browser-cookie3）"
+        "，并传给 yt-dlp 下载音轨/字幕；例如 chrome",
     )
     p.add_argument(
         "--prefer-subtitles",

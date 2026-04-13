@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 
-from bilibili_transcript.wbi import session_with_headers, sign_wbi
+from bilibili_transcript.wbi import session_with_browser_cookies, sign_wbi
 
 logger = logging.getLogger(__name__)
 
@@ -50,12 +50,26 @@ def list_official_subtitle_tracks(
     cid: int,
     aid: int,
     session: requests.Session,
+    *,
+    browser_cookie_injected: bool = False,
 ) -> List[Dict[str, Any]]:
     data = fetch_player_wbi_v2(bvid, cid, aid, session)
     sub = data.get("subtitle") or {}
     tracks = sub.get("subtitles") or []
-    if sub.get("need_login_subtitle"):
-        logger.info("稿件字幕需登录后可见（need_login_subtitle）。")
+    # need_login_subtitle 在 player data 根上；嵌套 subtitle 里不一定有
+    if data.get("need_login_subtitle") or sub.get("need_login_subtitle"):
+        if not tracks:
+            if browser_cookie_injected:
+                logger.info(
+                    "已注入浏览器 Cookie 后仍无官方字幕轨道，将尝试 yt-dlp 或 ASR。"
+                )
+            else:
+                logger.info(
+                    "该稿件字幕在接口侧需登录后才返回列表（need_login_subtitle）。"
+                    "网页已登录时能看到字幕，但本工具匿名请求会得到空列表。"
+                    "请使用 --cookies-from-browser <浏览器名>（会注入官方接口与 yt-dlp），"
+                    "并确保已安装: pip install browser-cookie3"
+                )
     return tracks
 
 
@@ -73,7 +87,11 @@ def pick_subtitle_track(tracks: List[Dict[str, Any]]) -> Optional[Dict[str, Any]
 
 
 def download_subtitle_json(subtitle_url: str, session: requests.Session) -> Dict[str, Any]:
-    r = session.get(subtitle_url, timeout=60.0)
+    url = (subtitle_url or "").strip()
+    # 接口有时返回 //host/path（无 scheme），requests 会报错
+    if url.startswith("//"):
+        url = "https:" + url
+    r = session.get(url, timeout=60.0)
     r.raise_for_status()
     return r.json()
 
@@ -108,13 +126,17 @@ def try_fetch_official_segments(
     bvid: str,
     cid: int,
     aid: int,
+    cookies_from_browser: Optional[str] = None,
 ) -> Optional[Tuple[List[Dict[str, Any]], str, Dict[str, Any]]]:
     """
     若存在可下载的官方字幕，返回 (segments, full_text, meta)。
     meta 含 lan, subtitle_url 等；否则 None。
     """
-    session = session_with_headers(bvid)
-    tracks = list_official_subtitle_tracks(bvid, cid, aid, session)
+    session = session_with_browser_cookies(bvid, cookies_from_browser)
+    browser_cookie_injected = bool(cookies_from_browser and str(cookies_from_browser).strip())
+    tracks = list_official_subtitle_tracks(
+        bvid, cid, aid, session, browser_cookie_injected=browser_cookie_injected
+    )
     track = pick_subtitle_track(tracks)
     if not track:
         return None

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巴菲特和芒格：如何停止浪费生命</title>
+<style>
+  :root {
+    --bg: #f2eeea;
+    --card: #ffffff;
+    --border: #d6cec6;
+    --text: #4a4340;
+    --text-light: #8a7e78;
+    --heading: #5e5450;
+    --accent-1: #a89b91;
+    --accent-2: #b8a99a;
+    --accent-3: #c4b7a6;
+    --accent-4: #8d9a8e;
+    --accent-5: #97a3a0;
+    --quote-bg: #ece8e3;
+    --quote-border: #b8a99a;
+    --highlight: #d4c5b2;
+    --tag-bg: #e6dfda;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.85;
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  header h1 {
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  header .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Summary Card */
+  .summary-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 36px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+
+  .summary-card h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-1);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .summary-card p {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  .summary-card strong {
+    color: var(--heading);
+    font-weight: 600;
+  }
+
+  .note {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+    line-height: 1.75;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .section:nth-child(1) .section-number { background: var(--accent-1); }
+  .section:nth-child(2) .section-number { background: var(--accent-4); }
+  .section:nth-child(3) .section-number { background: var(--accent-2); }
+  .section:nth-child(4) .section-number { background: var(--accent-5); }
+  .section:nth-child(5) .section-number { background: var(--accent-3); }
+
+  .section-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--heading);
+    line-height: 1.4;
+  }
+
+  .time-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    background: var(--tag-bg);
+    color: var(--text-light);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    font-family: "SF Mono", "Fira Code", monospace;
+  }
+
+  .section-intro {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    line-height: 1.8;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+
+  .content-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 28px 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+
+  .content-card p {
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  .content-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .content-card strong {
+    color: var(--heading);
+    font-weight: 600;
+    background: linear-gradient(to top, var(--highlight) 40%, transparent 40%);
+    padding: 0 2px;
+  }
+
+  .speaker {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent-4);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .speaker.munger {
+    color: var(--accent-5);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 60px; }
+    header { padding: 40px 0 28px; }
+    header h1 { font-size: 1.45rem; }
+    .summary-card, .content-card { padding: 22px 18px; }
+    .section-header h3 { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>巴菲特和芒格：如何停止浪费生命</h1>
+    <div class="subtitle">Berkshire Hathaway · 股东大会问答节选</div>
+  </header>
+
+  <!-- Summary -->
+  <div class="summary-card">
+    <h2>全文总结</h2>
+    <p>
+      本段素材为<strong>沃伦·巴菲特</strong>与<strong>查理·芒格</strong>在股东会/公开问答场合的节选。核心围绕几件事：<strong>怎样算「不浪费生命」</strong>——每天做自己喜欢的事、与彼此欣赏的人共事；以幽默谈及年龄、健身与「无法向所有人推荐」的生活习惯；<strong>高管薪酬与激励</strong>的荒谬；一位<strong>德国高中生</strong>问若人生重来会选哪一行业；巴菲特强调<strong>追随兴趣</strong>（「你要在事业里睡觉」）、早年幸运读到投资类书籍；<strong>如何选老板与配偶</strong>——为欣赏的人工作、择偶对人生的杠杆作用，芒格典型冷幽默补刀；最后回应<strong>纽约大学听众</strong>关于写作、公开表达与自信——巴菲特回忆自己曾极度害怕公开演讲，强调年轻时在小组中刻意练习、互相帮助克服恐惧。
+    </p>
+    <div class="note">
+      说明：以下为根据 ASR 整理的简体中文稿，已做繁简转换与明显口误修正（如口播将 Munger 误作「Wanger」等，正文按「芒格」统一）；原文为英语演讲，转写为繁体中文系识别结果，可能与原句逐词不完全一致。
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <h3>做喜欢的事、和彼此欣赏的人共事</h3>
+    </div>
+    <span class="time-tag">⏱ 00:00 – 03:26</span>
+    <div class="section-intro">
+      巴菲特与芒格以半开玩笑的方式谈日常：私人教练、每周锻炼与「其余时间都在做自己喜欢的事」；谈年龄与状态；强调与好人共事、做对世界有益之事；并过渡到公司治理里「薪酬与榜样」话题。
+    </div>
+    <div class="content-card">
+      <p>基本上，如果我和查理不能抱着一份好的心态，那谁都可以。我们可以做到每天都做自己喜欢的事；我们身边的人不仅人好、不仅喜欢我们，他们也喜欢自己的工作。我们几乎不需要被迫去做自己不想做的事。我有一位教练，每周来三次——她可能觉得我在某些动作上有点过头，但那不过每周三次、每次四十五分钟；其余时间，我都在做我喜欢的事，每天都在做，在空调房里工作，还在帮助别人。生命里怎么能不痛快呢？</p>
+      <p>有趣的是，查理八十四岁，我七十七岁。我们很多方面都在变慢，只是假装没有，但这并不妨碍我们做很好的伙伴、管理者和家人。我们要把注意力放在这些事上。至于健康：我们并没有对健康规则投入太多关注，目前看来也还顺。我不认为可以推荐给所有人，但我自己绝对不想改变。我们能与好人相处，就已经很了不起。</p>
+      <p>在公司里，如果你要拿钱，而那是唯一路径，你应当成为别人的榜样。如果把公司想成一个市场体系，却必须把天价报酬塞给某个人，而另一些人拿着一半薪水干同样多的活却没有任何额外补偿——我会觉得这套薪酬体系很荒谬。</p>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <h3>德国学生：若重来一次，会选哪一行？</h3>
+    </div>
+    <span class="time-tag">⏱ 03:27 – 05:48</span>
+    <div class="section-intro">
+      来自德国的 Richard 即将高中毕业，向巴菲特与芒格提问：如果重新开始，会选择哪个行业、为什么。巴菲特回答会仍选自己正在做的事：有趣、有收获、能遇见有趣的人；并强调必须弄清自己真正的兴趣，因为「你要在事业里睡觉」。
+    </div>
+    <div class="content-card">
+      <p>提问者自我介绍来自德国。他说即将高中毕业，希望两位解释「生命中……」——更想问的是：巴菲特先生、芒格先生，如果你们从头再来，会选择哪个行业？为什么？</p>
+      <p><span class="speaker">巴菲特</span><br>我会选择我现在做的事，因为有趣、有回报，还能遇到很多有趣的人，没有沉重的职级包袱，这很适合我；但这套答案未必适合你。<strong>你必须弄清楚自己生命里真正的兴趣是什么。</strong> 选错行是很糟糕的错误，因为你要在事业里「睡觉」——除非你相信雪莉·麦克雷恩那套「唯一」的说法。我很幸运，很早就发现了兴趣；这不容易，也需要运气。我父亲在公司有一间小办公室，里面有很多书；我放学后会待在那里读啊读，那些「玩具」其实一直在我心里。所以我很幸运。</p>
+      <p>如果我当年做的是别的，我不确定自己是否还会那么兴奋地去办公室。这是一种路径，我没法替你选，但如果你在人生里任由情绪牵着走，你会做出……当然，如果你需要那份工作养家，你会向现实低头。</p>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <h3>为欣赏的人工作，以及择偶的重要性</h3>
+    </div>
+    <span class="time-tag">⏱ 05:49 – 07:39</span>
+    <div class="section-intro">
+      巴菲特建议年轻人去为自己欣赏的个人或公司工作；回忆追随本杰明·格雷厄姆的两年：学习、与尊敬的人共事。芒格以幽默谈择偶：选对伴侣极其重要，有人花了二十年才找到对的妻子，却遇错了丈夫。
+    </div>
+    <div class="content-card">
+      <p>当你还有选择权时，我经常告诉来见我的孩子：<strong>去找你真心欣赏的某个人或某家公司。</strong> 这并不意味着你们都会成为雇员，但你的思路不会走到太差的方向。</p>
+      <p>我年轻时为<strong>本·格雷厄姆</strong>工作的时间其实只有两年多，但那段经历让我每天早上都迫不及待去办公室：我在学习，我在追随我尊敬的人。我甚至没纠结当时薪水多少，我还为此搬到纽约。</p>
+      <p><strong>你还必须选对伴侣——这极其重要。</strong> 芒格常开玩笑：有人花了二十年才找到理想的另一半，对方却未必同样理想——择偶这件事，选错成本极高。结婚是非常大的决定；运气好的话，你会拥有快乐的生活，也会把工作做得更好。</p>
+      <p>有时你会想到自己喜欢的事，但查理的建议可能更好——我就不替他展开了。当然，如果你培养出一项强烈的热情或能力，世界会听见你；<strong>天赋与投入会让你走出来。</strong></p>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <h3>纽约听众：如何用知识与勇气写书？</h3>
+    </div>
+    <span class="time-tag">⏱ 07:39 – 10:17</span>
+    <div class="section-intro">
+      来自纽约的 Nancy 介绍自己在写书，希望帮助人们获得自信与应得的认可，请教如何在行业里提升见解与表达。巴菲特由此回忆自己学生时代极度害怕公开演讲、逃避课堂发言的经历。
+    </div>
+    <div class="content-card">
+      <p>Nancy 自我介绍来自纽约，在纽约大学读书。她说自己在某些方面偏离了「投资主线」，但仍想发挥自己的精神与知识；她正在写一本书，希望让更多人建立自信、获得他们应得的认可。她问：<strong>你会给什么建议，帮助人们在行业里提升见解？</strong></p>
+      <p><span class="speaker">巴菲特</span><br>这是个好问题。我在中学、大学阶段<strong>非常害怕公开演讲</strong>——我逃避任何需要发言的课，别的同学被点名时我会生气，甚至想逃。因为后来必须站在人前上课，我才意识到：<strong>写作与口头表达同样重要。</strong> 学校里教授往往不愿做这件事，因为他们只想把课讲完；但如果你能沟通得好，你会拥有巨大优势。</p>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <h3>克服演讲恐惧：小班练习与互相打气</h3>
+    </div>
+    <span class="time-tag">⏱ 10:17 – 12:49</span>
+    <div class="section-intro">
+      巴菲特强调年轻时要把自己推入必须成长的情境，推荐与同伴一起训练表达；以戴尔·卡耐基式课程为例：从说不出名字到能在众人前开口。芒格赞赏做「简单且重要」的事。
+    </div>
+    <div class="content-card">
+      <p>我相信最好的方法是：<strong>和一群人一起练。</strong> 你会发现你不是一个人，事情也没那么可怕。他们那套做法，是让三十个人先在彼此面前连自己的名字都说不好；过一阵子，就能在人群前开口，甚至还会站到桌子上做各种练习，只为了最后能轻松离开房间——你会觉得「我是不是走太远了」，但那是另一回事。</p>
+      <p>如果你在帮助成年人克服同样的恐惧、让他们看见别人也有同样的问题，他们会轻松很多。我认为你在做一件非常有价值的事。</p>
+      <p><span class="speaker munger">芒格</span><br>是的，我很高兴看到有人教那些<strong>简单却重要</strong>的东西，而不是教复杂却不重要的东西。</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>整理自伯克希尔·哈撒韦股东大会公开问答 · ASR 转写稿</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

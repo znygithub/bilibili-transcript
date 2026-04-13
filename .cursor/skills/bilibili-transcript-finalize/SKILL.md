@@ -1,76 +1,117 @@
 ---
 name: bilibili-transcript-finalize
 description: >-
-  After bilibili_transcript outputs transcript JSON, Cursor sub-agents produce 成稿.md, then by default
-  another sub-agent follows docs/transcript_morandi_html/README.md to produce 成稿.html.
-  Primary trigger: Bilibili URL. HTML uses repo docs only—no second Cursor Skill.
+  Bilibili URL → bilibili_transcript (subtitle-first, no ASR when CC exists) → 成稿.md → 必生成 成稿.html
+  (Morandi). Do not ask whether to build HTML. macOS: Full Disk Access for Terminal + Cursor if using
+  browser cookies. See repo docs/transcript_morandi_html/.
 ---
 
-# B 站：脚本出文字稿，Cursor 子 Agent 做成稿 +（默认）莫兰迪 HTML
+# B 站：脚本出文字稿，Cursor 做成稿 + **必生成**莫兰迪 HTML
+
+> 文内 `docs/…`、`TRANSCRIPT_STRATEGY.md` 均相对**本仓库根目录**。
+
+## Gotcha（常见翻车点）
+
+- **`finalize_md` / CLI 写出来的 md 不是终稿**：只是分桶 + 原文拼接；**无标点、字墙**＝② 还没做，别当交付物。  
+- **多 P / 上下集**：`BV*_p1`、`BV*_p2` **各自**要做完 ②→③；只润一集或只润 1.1，另一集/节仍是字幕。  
+- **子 Agent 不会自动跑**：跑完 Python **不会**自动再起一轮润色；必须在对话里**显式**完成 ②（再 ③）。  
+- **③ 不能救 ②**：用未润色 md 生成的 HTML，只是**排版好的字墙**；先定稿 md，再 `export_morandi_html` 或手写 HTML。
+
+## 收到 B 站视频链接时的铁律
+
+1. **必跑完整链路**：① `bilibili_transcript` → ② 成稿 `*_transcript_成稿.md` → ③ **`*_transcript_成稿.html`**。  
+2. **不要问**「要不要生成网页 / HTML」——**默认就做**，除非用户**明确**说只要 Markdown、不要 HTML。  
+3. ③ 完成后按 [`docs/transcript_morandi_html/README.md`](docs/transcript_morandi_html/README.md) 用系统默认浏览器 **自动打开** 该 HTML（`open` / `xdg-open` / `start`）。
+
+## 字幕已有 → 不要自己转写（判定规则）
+
+流水线**优先字幕**，**不是**一上来 Whisper。主 Agent 跑 ① 时必须遵守：
+
+| 判定依据 | 怎么做 |
+|----------|--------|
+| **目标** | 只要站方字幕能拉到（官方 CC / yt-dlp 字幕文件），**就不要**走本机 ASR（`faster-whisper`）。 |
+| **默认参数** | 使用 **`--cookies-from-browser <浏览器>`**（例如 `chrome`），与网页登录态一致；详见 [`TRANSCRIPT_STRATEGY.md`](TRANSCRIPT_STRATEGY.md)。匿名请求时 `wbi/v2` 可能对「需登录字幕」返回空列表，**不等于**没有字幕。 |
+| **如何确认已走字幕、未走 ASR** | 读 `*_transcript.json` 里的 **`part_sources`**：若某项 **`mode` 为 `official_cc` 或 `ytdlp_subtitle_file`**，该分 P 即为字幕轨，**禁止**再对该稿 **`--force-asr`** 重跑覆盖。 |
+| **只有**当 `part_sources` 里对应分 P 为 **`asr`**（或无任何分段且已排除网络/权限问题）时，才视为「只能转写」。 |
+| **多 P / 上下集** | 用户要第几 P 就加 **`--part N`**；多集分别输出到不同目录，各自再做 ②③。 |
+
+**小结**：先按「字幕优先 + 浏览器 Cookie」跑脚本 → 用 **`part_sources.mode`** 判定来源；**已有字幕则不要重复提取（不要强制 ASR）**。
+
+### macOS：读浏览器 Cookie 时的系统权限
+
+使用 **`--cookies-from-browser`** 时，本机会用 **`browser-cookie3`** 读取浏览器内 `bilibili.com` 的 Cookie。若系统多次弹窗要求输入**登录密码**或授权：
+
+- 在 **系统设置 → 隐私与安全性 → 完全磁盘访问权限** 中，为 **「终端」** 与 **Cursor**（以及你实际用来执行 Python 的终端类 App）**勾选授权**。  
+- 授权后**退出并重新打开**对应 App，再跑脚本；一般可明显减少重复弹窗。  
+- 这与「业务逻辑」无关，是 macOS 对浏览器敏感数据的保护。
 
 ## 成稿转网页（莫兰迪）— 仓库文档，不是第二个 Skill
 
-- **位置**（相对仓库根目录）：[`docs/transcript_morandi_html/README.md`](../../docs/transcript_morandi_html/README.md) 与同目录 [`morandi-template.html`](../../docs/transcript_morandi_html/morandi-template.html)。
-- **是什么**：普通 Markdown 指引 + HTML 模板；**不**放在 `.cursor/skills/`，**不**增加本机全局 Skill 数量；由阶段③ 子 Agent **当操作规范阅读并执行**，效果类似 Skill，但无需单独注册。
-- **怎么用**：② 完成后 **默认**再启动子 Agent，指令中写明：阅读上述 **README** 与 **模板**，根据成稿 `*_transcript_成稿.md` 写出同路径 **`*_transcript_成稿.html`**；写完后按 **`docs/transcript_morandi_html/README.md`** 用 **`open` / `xdg-open` / `start`** 在默认浏览器**自动打开**该 HTML，**不要**只生成文件让用户自己点开。
+- **位置**：[`docs/transcript_morandi_html/README.md`](docs/transcript_morandi_html/README.md) 与 [`morandi-template.html`](docs/transcript_morandi_html/morandi-template.html)。  
+- **怎么用**：② 完成后 **必须**再启子 Agent，按 README + 模板写入 **`*_transcript_成稿.html`**，并 **自动打开**；主 Agent **不要**在对话里贴整页 HTML。
 
 ## 分工（必须遵守）
 
 | 阶段 | 谁做 | 产出 |
 |------|------|------|
-| **① 脚本** | `python -m bilibili_transcript`（本仓库 CLI） | **只生成文字稿**：`*_transcript.json`（含 `segments` 时间轴与口播文本）。可选 `{bvid}_transcript.md` 粗分块草稿。脚本**不写**全文总结、不做翻译、不把终稿成稿当唯一目标。 |
-| **② Cursor** | **主 Agent 编排 + 若干子 Agent** | 基于 JSON 做 **翻译**（英文 ASR→中文）、**总结**（全文总结 + 每节摘要）、标点与分段，输出 **`*_transcript_成稿.md`**。 |
-| **③ 默认必跑** | **另一个 Cursor 子 Agent**（非脚本） | 在 **`*_transcript_成稿.md` 已写入磁盘** 之后，主 Agent **必须再启动一个子 Agent**，按 **`docs/transcript_morandi_html/README.md`** 与同目录 **`morandi-template.html`**，生成与成稿同路径、同主文件名的 **`*_transcript_成稿.html`**（莫兰迪单页）。 |
+| **① 脚本** | `python -m bilibili_transcript`（本仓库 CLI） | **只生成文字稿**：`*_transcript.json`（含 `segments` 与 **`part_sources`**）。可选草稿 `.md`、可选 `finalize_md` 初版结构 md。脚本**不写**终稿级全文总结，**不对口播正文做**去口癖、标点、分段、换行等处理。 |
+| **② Cursor** | **主 Agent 编排 + 若干子 Agent** | 基于 JSON 做 **翻译**（英文→中文）、**全文总结**、**去口癖**、**标点与分段/换行**、小节标题与段前摘要，输出并覆盖 **`*_transcript_成稿.md`**。 |
+| **③ 必跑** | **子 Agent** | 在成稿 `.md` 落盘后，按 **`docs/transcript_morandi_html/`** 生成 **`*_transcript_成稿.html`**。 |
 
-- 主 Agent：跑完 ① 后，**不要**自己在一条回复里塞下全文翻译+总结；应 **启动子 Agent**（若可用 `Task` 工具则并行）分工完成 ②，再合并写入文件。
-- 子 Agent 职责示例：子 Agent 1 = 仅「全文总结」；子 Agent 2～6 = 各管 1/5 节的标题+摘要+译/润色正文。
-- **③ 与 ② 衔接**：② 的成稿 `.md` 一完成，**除非用户在本轮对话中明确说只要 Markdown、不要网页**，否则**必须**执行 ③。主 Agent **不要**自己在对话里贴整页 HTML；③ 专由子 Agent 按 **`docs/transcript_morandi_html/`** 指引写文件。**仓库不提供** `md→html` 的 Python 脚本。
+- 主 Agent：跑完 ① 后，**不要**在单条回复里塞万字成稿；应 **启动子 Agent** 完成 ②。  
+- **③ 推荐**：成稿 md 定稿后，用 **`tools/export_morandi_html.py`** 生成 HTML（**仅**结构与转义，不改写正文）；亦可按 [`docs/transcript_morandi_html/`](docs/transcript_morandi_html/) 手写单页。禁止用语义脚本替代 ② 的润色。
+
+### 禁止：用 Python 脚本处理终稿正文
+
+- **不允许**使用仓库内或自写脚本对逐字稿做 **去口癖、整理语序、加标点、分段、换行** 等语义/可读性处理（含已移除的 `format_body` 类启发式）。  
+- **`finalize_md` / CLI 若写出 `*_transcript_成稿.md`**，其中逐字部分仅为 **原文拼接 + 分桶结构**，**必须**由子 Agent 按上文要求 **覆盖为终稿**。  
+- **`text_post.format_body`** 为兼容保留，**原样透传**，不参与终稿质量；终稿可读性 **只认子 Agent 产出**。
 
 ## 何时触发
 
-1. **主触发**：用户发来 **B 站视频链接**（`bilibili.com`、`b23.tv` 或含 `BV`+10 位）。→ 先执行 ①，再 ②，再 **默认 ③**（莫兰迪 HTML）。
-2. **次触发**：已有 `*_transcript.json`（用户 `@` 文件或提到 `case_outputs` / 成稿）。→ 从 ② 起；若已有成稿 `.md` 仅缺 HTML，可只跑 **③** 子 Agent（同样读 `docs/transcript_morandi_html/`）。
+1. **主触发**：用户发来 **B 站视频链接**（`bilibili.com`、`b23.tv` 或含 `BV`+10 位）。→ **① → ② → ③**，**含 HTML**。  
+2. **次触发**：已有 `*_transcript.json` 或成稿 `.md`。→ 从缺的那步补；若仅缺 HTML，只跑 **③**。
 
-### 收到 URL 时的顺序
+### 收到 URL 时的建议命令形态
 
-1. 跑脚本（若尚无 json）：  
-   `python -m bilibili_transcript "<URL或BV>" -o case_outputs/<BV号>`
-2. 确认 `case_outputs/<BV号>/<BV>_transcript.json` 存在。
-3. **用子 Agent** 按下文「交付物」生成终稿 `*_transcript_成稿.md`，**不是**让主对话一次性生成万字画稿。
-4. **默认**：再 **启动子 Agent**，按 **`docs/transcript_morandi_html/README.md`** 与模板生成 **`*_transcript_成稿.html`**。
+```bash
+python -m bilibili_transcript "<URL或BV>" -o case_outputs/<BV号或子目录> \
+  --cookies-from-browser chrome
+```
+
+按需加 `--part N`、`--ytdlp-subs`（官方仍空时再试 yt-dlp）。**不要**默认加 `--force-asr`。
+
+确认 `*_transcript.json` 存在后，再做 ②、③。
 
 ## 输入（子 Agent 共用）
 
-- `*_transcript.json` 中的 `title`、`bvid`、`segments`（`start` / `end` / `text`）。
+- `*_transcript.json` 中的 `title`、`bvid`、`segments`、`part_sources`。
 
-## 交付物（子 Agent 合并结果）
+## 交付物
 
-- **必交**：`<sanitize(标题)>_<bvid>_transcript_成稿.md`（规则同 `bilibili_transcript/text_post.sanitize_filename_title`）；版式与结构见下节 **「文稿要求」**。
-- **默认同路径另交**：`<sanitize(标题)>_<bvid>_transcript_成稿.html`（按 **`docs/transcript_morandi_html/`** 指引生成；用户明确不要网页时可省略）。
+- **必交**：`<sanitize(标题)>_<bvid>_transcript_成稿.md`（规则同 `bilibili_transcript/text_post.sanitize_filename_title`）。  
+- **必交**：同路径 **`<sanitize(标题)>_<bvid>_transcript_成稿.html`**；**仅当用户明确不要网页时**可省略 HTML。
 
 ## 文稿要求（终稿必须满足，与仓库 `TRANSCRIPT_STRATEGY.md` 成稿版式对齐）
 
 ### 文档结构
 
-1. **一级标题** `#`：使用 JSON 的 `title`（B 站视频标题），勿用纯 BV 号当标题。
-2. **`## 全文总结`**：简体中文，**尽量详细**——背景、说话人/博主、主线论点、关键数据与案例、结论；可用加粗突出重点；**不编造**音视频里不存在的事实；ASR 明显同音错误可在总结中括号注明「口播作 xxx」。
-3. **`## 1. 完整逐字稿`**：其下固定 **5 个小节** `### 1.1` … `### 1.5`（与 `finalize_md.split_segments_into_n_buckets(..., 5)` 分桶一致）。
-4. **小节标题**：必须是**话题短标题**（如「开场：xxx」「案例：xxx」），**禁止**单独使用「时间片段 1（00:00–05:00）」类作为唯一标题；时间只允许出现在下方引用摘要里。
-5. **每节开头（引用块）**  
-   - 第一行：`> （时间参考：MM:SS–MM:SS）`（由该节首尾 segment 的 `start`/`end` 推算）。  
-   - 第二行起：`> ` 接 **2～4 句**本节中文摘要，只概括本节，不剧透其他节。
-6. **正文**：简体中文为主；口播为英文时译为通顺口语化中文；**公司/产品/人名**用通用中文译名或保留英文并在首次出现必要时括注，全书专名统一。
-7. **多说话人**（访谈/对谈）：若从文本可区分，可用 **`主持人：`** / **`嘉宾：`** 等加粗标签分行；**无法判断时不要编造身份**。
-8. **标点与分段**：中文全角标点；按语义分段，禁止把正文压成无标点长串，也禁止机械按固定字数折行冒充排版。
+1. **一级标题** `#`：使用 JSON 的 `title`（B 站视频标题），勿用纯 BV 号当标题。  
+2. **`## 全文总结`**：简体中文，**尽量详细**——背景、说话人/博主、主线论点、关键数据与案例、结论；可用加粗突出重点；**不编造**事实；字幕/ASR 明显错误可在总结中括号注明。  
+3. **`## 1. 完整逐字稿`**：其下固定 **5 个小节** `### 1.1` … `### 1.5`（与 `finalize_md.split_segments_into_n_buckets(..., 5)` 分桶一致）。  
+4. **小节标题**：**话题短标题**；**禁止**仅以「时间片段 1（00:00–05:00）」为唯一标题。  
+5. **每节开头（引用块）**：首行 `> （时间参考：MM:SS–MM:SS）`；后续 2～4 句本节摘要。  
+6. **正文**：简体中文为主；英文口播译成通顺中文；专名统一。  
+7. **多说话人**：可 **`主持人：`** / **`嘉宾：`** 等；**无法判断时不要编造**。  
+8. **标点与分段**：中文全角标点；按语义分段。
 
 ### 语言与忠实度
 
-- 终稿主体为**简体中文**；原文英文须译出，勿整段英文堆在终稿（专名、固定产品名可保留或括注）。
-- 逐字部分以 JSON 为据，可纠错标点与同音字，**不得虚构观点、案例、数字**。
+- 终稿主体为**简体中文**；逐字以 JSON 为据，**不得虚构**观点、案例、数字。
 
 ### 文件名
 
-- `{sanitize_filename_title(title)}_{bvid}_transcript_成稿.md`；非法路径字符与过长标题按 `text_post.sanitize_filename_title` 处理。
+- `{sanitize_filename_title(title)}_{bvid}_transcript_成稿.md` / `.html`。
 
 ## 分桶规则（与代码一致）
 
@@ -78,9 +119,9 @@ description: >-
 
 ## 与 `finalize_md.py` 的关系
 
-- Python 可能生成一版初稿成稿，**以本子 Agent 流程产出的终稿为准**覆盖或替换。
+- Python 可能生成一版**仅含结构与原文拼接**的 md，**以本子 Agent 流程产出的终稿为准**覆盖或替换；**不得**依赖脚本完成润色。
 
 ## 完成后
 
-- 回复用户：**`.md` 与 `.html` 路径**（默认两者都有）、是否经子 Agent 并行、译/润色说明。
-- **默认**已在 ③ 按 `docs/transcript_morandi_html/` 产出 **`*_transcript_成稿.html`**，并已 **自动用浏览器打开**（见该目录 README「交付」）；若本轮跳过 HTML，在回复里说明原因（例如用户声明只要 md）。
+- 回复用户：**`.md` 与 `.html` 路径**、**`part_sources` 来源**（字幕 / ASR）、是否已自动打开 HTML。  
+- 若用户事先声明只要 md，在回复里说明**未生成 HTML**的原因。

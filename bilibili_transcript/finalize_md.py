@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-from bilibili_transcript.text_post import format_body, sanitize_filename_title
+from bilibili_transcript.text_post import sanitize_filename_title
 
 
 def _fmt_ts(seconds: float) -> str:
@@ -136,8 +136,10 @@ def _full_summary_bv1f3() -> str:
 
 def write_eval_markdown_from_json(json_path: Path, out_path: Optional[Path] = None) -> Path:
     """
-    从 *_transcript.json 生成「成稿」Markdown：含可检阅的全文总结 + 话题小节 + 段前摘要 + 逐字正文。
-    BV1f3DYBDE9h 使用人工撰写的总结与分节摘要；其余稿件使用通用分节与截断摘要占位。
+    从 *_transcript.json 生成**初版**成稿 Markdown：结构 + 分桶时间 + 原文拼接。
+
+    逐字正文为 **segments 文本直接拼接**，不经脚本润色；终稿须由 Cursor 子 Agent 按 Skill
+    去口癖、标点、分段、换行（及英译中若需要）。BV1f3DYBDE9h 等使用内嵌总结与分节摘要模板。
     """
     data = json.loads(json_path.read_text(encoding="utf-8"))
     title = data.get("title") or data.get("bvid") or "标题"
@@ -173,12 +175,8 @@ def write_eval_markdown_from_json(json_path: Path, out_path: Optional[Path] = No
         t0, t1 = b[0]["start"], b[-1]["end"]
         extra = blurbs[i] if i < len(blurbs) else ""
         blurb = f"（时间参考：{_fmt_ts(t0)}–{_fmt_ts(t1)}）\n{extra.strip()}"
-        raw = "".join(s.get("text") or "" for s in b)
-        # 英文 ASR：排版用英文规则；中文稿件用 zh（不调用任何外部翻译服务）
-        if bvid == "BV1ijE4zwEHP":
-            body = format_body(raw, lang_hint="en")
-        else:
-            body = format_body(raw, lang_hint="zh")
+        # 逐字正文为 segment 原文拼接；标点、分段、去口癖等由 Cursor 子 Agent 终稿覆盖，不用脚本改写。
+        body = "".join(s.get("text") or "" for s in b)
 
         subsections.append((h, blurb, body))
 

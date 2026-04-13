@@ -2,7 +2,7 @@
 
 ## 这个项目在做什么
 
-在**本机**把 B 站视频转成可核对的 **`{BV号}_transcript.json`**（分段时间轴、可选词级时间戳），再生成可检阅的 **`{标题slug}_{BV号}_transcript_成稿.md`**（全文总结、分话题小节、段前摘要、逐字正文）。**Python 流水线只负责文字稿与初版成稿结构，不调用大模型 HTTP API**；成稿的总结、翻译与润色由 **Cursor** 按 [成稿 Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)（子 Agent）完成。在 Cursor 里，**默认**在成稿 `.md` 就绪后再由**另一个子 Agent** 按仓库文档 [**`docs/transcript_morandi_html/README.md`**](docs/transcript_morandi_html/README.md)（及同目录 `morandi-template.html`）生成同名的 **`*_transcript_成稿.html`**（单文件、内联样式；**不是**第二个 Cursor Skill，不增加本机 Skill 数量；**仓库不提供** `md→html` 脚本；用户明确只要 md 时可跳过）。
+在**本机**把 B 站视频转成可核对的 **`{BV号}_transcript.json`**（分段时间轴、可选词级时间戳），再生成可检阅的 **`{标题slug}_{BV号}_transcript_成稿.md`**（初版可为结构 + 原文拼接）。**Python 流水线只负责拉稿与结构化，不调用大模型 HTTP API**，也**不用脚本**做去口癖、标点、分段等终稿处理；成稿的总结、翻译与全文润色由 **Cursor** 按 [成稿 Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)（子 Agent）完成。在 Cursor 里，**默认**在成稿 `.md` 就绪后再由**另一个子 Agent** 按仓库文档 [**`docs/transcript_morandi_html/README.md`**](docs/transcript_morandi_html/README.md)（及同目录 `morandi-template.html`）生成同名的 **`*_transcript_成稿.html`**（单文件、内联样式；**不是**第二个 Cursor Skill，不增加本机 Skill 数量；**仓库不提供** `md→html` 脚本；用户明确只要 md 时可跳过）。
 
 **仓库**：<https://github.com/znygithub/bilibili-transcript>（公开，无密钥）
 
@@ -11,7 +11,7 @@ pip install -r requirements.txt   # 建议使用 venv
 python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 ```
 
-「字幕 / ASR 先后的决策树」与常用 CLI 参数见 [**TRANSCRIPT_STRATEGY.md**](TRANSCRIPT_STRATEGY.md)。
+「字幕 / ASR 先后的决策树」与常用 CLI 参数见 [**TRANSCRIPT_STRATEGY.md**](TRANSCRIPT_STRATEGY.md)。成稿易错点见 **[`bilibili-transcript-finalize` Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)** 中的 **Gotcha** 一节。
 
 ---
 
@@ -21,7 +21,7 @@ python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 
 - 优先使用 **B 站官方 CC 字幕**（与播放器一致），若无则 **yt-dlp 拉字幕**，再不行则 **faster-whisper ASR**；
 - 输出结构化 **`{BV号}_transcript.json`**（含分段时间轴、可选词级时间戳）；
-- 生成 **`{标题slug}_{BV号}_transcript_成稿.md`**：含「全文总结 + 分话题小节 + 段前摘要 + 逐字正文」（部分 BV 在 `finalize_md.py` 里写死了总结/分节模板）；
+- 生成 **`{标题slug}_{BV号}_transcript_成稿.md`**（初版）：分桶结构 + 原文拼接；部分 BV 在 `finalize_md.py` 里写死了总结/分节模板；**终稿润色仅由 Cursor 子 Agent** 覆盖；
 - **Python 流水线不调用大模型 HTTP API**；成稿的总结与翻译由 **Cursor Agent** 按项目内 **Skill** 执行（见下），无需用户在对话里手动复制 JSON。
 
 **非目标**：在 Python 内封装「调用 OpenAI / 公司网关」的总结服务（若需要可另加模块）。
@@ -32,8 +32,8 @@ python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 
 | 层级 | 做什么 |
 |------|--------|
-| **脚本**（`bilibili_transcript`） | **只生成文字稿**：`*_transcript.json`（含分段时间与口播文本）。不写终稿总结、不做翻译终稿。 |
-| **Cursor（成稿）** | 按 **[`bilibili-transcript-finalize`](.cursor/skills/bilibili-transcript-finalize/SKILL.md)**：主 Agent 跑完脚本后，**用子 Agent** 分工完成 **全文总结、翻译、分节摘要、润色**，写入 `*_transcript_成稿.md`（勿用单条回复硬塞万字）。 |
+| **脚本**（`bilibili_transcript`） | **只生成文字稿**：`*_transcript.json`（含分段时间与口播文本）。不写终稿总结、不做翻译终稿、**不用启发式脚本**对口播做去口癖/标点/分段。 |
+| **Cursor（成稿）** | 按 **[`bilibili-transcript-finalize`](.cursor/skills/bilibili-transcript-finalize/SKILL.md)**：主 Agent 跑完脚本后，**用子 Agent** 分工完成 **全文总结、翻译、去口癖、标点、分段/换行、分节摘要**，写入 `*_transcript_成稿.md`（勿用单条回复硬塞万字）。 |
 | **Cursor（默认可视化）** | 成稿 `.md` 已落盘后，主 Agent **默认再启动一个子 Agent**，读 **[`docs/transcript_morandi_html/README.md`](docs/transcript_morandi_html/README.md)** 与 **[`morandi-template.html`](docs/transcript_morandi_html/morandi-template.html)**，生成 **`*_transcript_成稿.html`**。主对话同样不要整页贴 HTML。用户**明确只要 md、不要网页**时可跳过。 |
 
 **用户操作**：发 **B 站链接** 或 `@` 已有 `*_transcript.json` 即可；**不要求**手抄 JSON。
@@ -69,8 +69,9 @@ B 站 URL 或 BV 号
 | [`wbi.py`](bilibili_transcript/wbi.py) | B 站 **WBI 签名**。 |
 | [`subtitles.py`](bilibili_transcript/subtitles.py) | 官方 CC 解析；可选 `yt-dlp` 字幕文件解析。 |
 | [`transcribe.py`](bilibili_transcript/transcribe.py) | **faster-whisper** 转写、`save_transcript_json`。 |
-| [`finalize_md.py`](bilibili_transcript/finalize_md.py) | 从 JSON 生成 **成稿 Markdown**；特定 BV 的内嵌总结/分节；`format_body` 仅做排版启发式。 |
-| [`text_post.py`](bilibili_transcript/text_post.py) | `sanitize_filename_title`、`format_body`（中/英）。 |
+| [`finalize_md.py`](bilibili_transcript/finalize_md.py) | 从 JSON 生成 **初版**成稿 Markdown（结构 + 原文拼接）；特定 BV 的内嵌总结/分节；**不**对正文做脚本级润色。 |
+| [`text_post.py`](bilibili_transcript/text_post.py) | `sanitize_filename_title`；`format_body` 为兼容保留，**原样透传**正文。 |
+| [`tools/export_morandi_html.py`](tools/export_morandi_html.py) | 成稿 md 定稿后生成莫兰迪 HTML（**仅**结构与转义，不改正文）。 |
 
 已删除、不再维护的文件（避免误以为「还有机翻/LLM 模块」）：~~`translate.py`~~、~~`llm_md.py`~~、~~`cursor_export.py`~~（曾生成易误解的 `*_cursor_prompt.md`）。
 
@@ -82,7 +83,7 @@ B 站 URL 或 BV 号
 |------|------|
 | `*_transcript.json` | **事实源**：`bvid`、`title`、`text`、`segments[]`、`part_sources`。 |
 | `{bvid}_transcript.md` | 按时间分块的草稿；总结与话题标题为空或占位，需自行编辑（`--json-only` 时不生成）。 |
-| `{标题slug}_{BV号}_transcript_成稿.md` | **检阅用成稿**：Python 可出初版；终稿由 **Cursor Skill** 润色/翻译后覆盖（见上）。 |
+| `{标题slug}_{BV号}_transcript_成稿.md` | **检阅用成稿**：Python 可出初版（结构 + 原文）；可读终稿由 **Cursor 子 Agent** 润色/翻译后覆盖（见上）。 |
 | `{标题slug}_{BV号}_transcript_成稿.html` | **默认同套产出**：单页阅读版，由 **Cursor** 按 **`docs/transcript_morandi_html/`** 生成，与成稿同目录、同主文件名（用户明确不要网页时可无）。 |
 | `case_outputs/` | 示例输出目录；可含 `*_p1.mp3` 等。 |
 
@@ -108,8 +109,7 @@ python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 ## 7. 成稿逻辑与定制点（`finalize_md.py`）
 
 - 对特定 `bvid` 可配置：分节标题、段前摘要、全文总结（如 `_full_summary_bv1f3()`）。
-- 英文 ASR：`format_body(..., lang_hint="en")` 仅为初版排版；**中文终稿**由 Skill `bilibili-transcript-finalize` 在 Cursor 侧完成翻译与成稿。
-- 中文 ASR 初版：`format_body(..., lang_hint="zh")`；可读性终稿由同一 Skill 润色。
+- 逐字部分为 **segments 原文拼接**，不经 Python 做标点/分段/去口癖；**英/中文可读终稿**均由 Skill `bilibili-transcript-finalize` 在 Cursor 侧由**子 Agent**完成（翻译、润色、排版）。
 
 ---
 
