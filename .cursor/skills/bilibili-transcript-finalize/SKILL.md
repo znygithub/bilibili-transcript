@@ -14,9 +14,11 @@ description: >-
 |------|------|------|
 | **① 脚本** | `python -m bilibili_transcript`（本仓库 CLI） | **只生成文字稿**：`*_transcript.json`（含 `segments` 时间轴与口播文本）。可选 `{bvid}_transcript.md` 粗分块草稿。脚本**不写**全文总结、不做翻译、不把终稿成稿当唯一目标。 |
 | **② Cursor** | **主 Agent 编排 + 若干子 Agent** | 基于 JSON 做 **翻译**（英文 ASR→中文）、**总结**（全文总结 + 每节摘要）、标点与分段，输出 **`*_transcript_成稿.md`**。 |
+| **③ 可选** | **另一个 Cursor 子 Agent**（非脚本） | 在 **`*_transcript_成稿.md` 已生成** 之后，由主 Agent **单独启动子 Agent**，让其阅读 skill **`bilibili-morandi-html`**（含 `morandi-template.html`），把成稿转为单页 **`*_transcript_成稿.html`**。 |
 
 - 主 Agent：跑完 ① 后，**不要**自己在一条回复里塞下全文翻译+总结；应 **启动子 Agent**（若可用 `Task` 工具则并行）分工完成 ②，再合并写入文件。
 - 子 Agent 职责示例：子 Agent 1 = 仅「全文总结」；子 Agent 2～6 = 各管 1/5 节的标题+摘要+译/润色正文。
+- **③**：成稿 `.md` 落盘且用户要网页版时，主 Agent **不要**自己在对话里贴整页 HTML；应 **再启动一个子 Agent**，指令中写明：读 `bilibili-morandi-html` skill、输入为刚写好的成稿路径（或 `@` 文件）。**仓库不提供** `md→html` 的 Python 脚本，HTML 由该子 Agent 按 skill 写出文件即可。
 
 ## 何时触发
 
@@ -74,3 +76,4 @@ description: >-
 ## 完成后
 
 - 回复用户：成稿路径、是否经子 Agent 并行、译/润色说明。
+- 若用户还要求 **HTML 阅读版**：**启动子 Agent**，使其遵循 **`bilibili-morandi-html`**，产出与成稿同路径、同主文件名的 **`*_transcript_成稿.html`**。
