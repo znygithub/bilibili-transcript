@@ -1,3 +1,3 @@
-"""Bilibili → MP3 → ASR → Markdown pipeline."""
+"""Video transcript pipeline: subtitles-first, ASR-fallback."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

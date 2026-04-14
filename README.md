@@ -1,134 +1,127 @@
 # bilibili-transcript
 
-## 这个项目在做什么
+本地视频转写流水线：**优先字幕 → 否则本机 ASR → 结构化 JSON + Markdown + HTML**。
 
-在**本机**把 B 站视频转成可核对的 **`{BV号}_transcript.json`**（分段时间轴、可选词级时间戳），再生成可检阅的 **`{标题slug}_{BV号}_transcript_成稿.md`**（初版可为结构 + 原文拼接）。**Python 流水线只负责拉稿与结构化，不调用大模型 HTTP API**，也**不用脚本**做去口癖、标点、分段等终稿处理；成稿的总结、翻译与全文润色由 **Cursor** 按 [成稿 Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)（子 Agent）完成。在 Cursor 里，**默认**在成稿 `.md` 就绪后再由**另一个子 Agent** 按仓库文档 [**`docs/transcript_morandi_html/README.md`**](docs/transcript_morandi_html/README.md)（及同目录 `morandi-template.html`）生成同名的 **`*_transcript_成稿.html`**（单文件、内联样式；**不是**第二个 Cursor Skill，不增加本机 Skill 数量；**仓库不提供** `md→html` 脚本；用户明确只要 md 时可跳过）。
+当前支持 **Bilibili**，架构已预留扩展接口（YouTube、小宇宙等可通过添加 Provider 接入）。Python 流水线**不调用外部 LLM API**——全文总结、翻译、润色由 AI 编程助手（Cursor、Claude Code 等）按 [Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md) 完成。
 
-**仓库**：<https://github.com/znygithub/bilibili-transcript>（公开，无密钥）
+## 快速开始
 
 ```bash
-pip install -r requirements.txt   # 建议使用 venv
+pip install -e .                  # 或 pip install -r requirements.txt
 python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
 ```
 
-「字幕 / ASR 先后的决策树」与常用 CLI 参数见 [**TRANSCRIPT_STRATEGY.md**](TRANSCRIPT_STRATEGY.md)。成稿易错点见 **[`bilibili-transcript-finalize` Skill](.cursor/skills/bilibili-transcript-finalize/SKILL.md)** 中的 **Gotcha** 一节。
-
----
-
-## 1. 项目目标
-
-在**本机**完成 B 站视频的**可核对转写**与**本地文稿产物**，用于：
-
-- 优先使用 **B 站官方 CC 字幕**（与播放器一致），若无则 **yt-dlp 拉字幕**，再不行则 **faster-whisper ASR**；
-- 输出结构化 **`{BV号}_transcript.json`**（含分段时间轴、可选词级时间戳）；
-- 生成 **`{标题slug}_{BV号}_transcript_成稿.md`**（初版）：分桶结构 + 原文拼接；部分 BV 在 `finalize_md.py` 里写死了总结/分节模板；**终稿润色仅由 Cursor 子 Agent** 覆盖；
-- **Python 流水线不调用大模型 HTTP API**；成稿的总结与翻译由 **Cursor Agent** 按项目内 **Skill** 执行（见下），无需用户在对话里手动复制 JSON。
-
-**非目标**：在 Python 内封装「调用 OpenAI / 公司网关」的总结服务（若需要可另加模块）。
-
----
-
-## 2. 分工：脚本 = 文字稿；Cursor 子 Agent = 成稿；默认再开子 Agent = HTML
-
-| 层级 | 做什么 |
-|------|--------|
-| **脚本**（`bilibili_transcript`） | **只生成文字稿**：`*_transcript.json`（含分段时间与口播文本）。不写终稿总结、不做翻译终稿、**不用启发式脚本**对口播做去口癖/标点/分段。 |
-| **Cursor（成稿）** | 按 **[`bilibili-transcript-finalize`](.cursor/skills/bilibili-transcript-finalize/SKILL.md)**：主 Agent 跑完脚本后，**用子 Agent** 分工完成 **全文总结、翻译、去口癖、标点、分段/换行、分节摘要**，写入 `*_transcript_成稿.md`（勿用单条回复硬塞万字）。 |
-| **Cursor（默认可视化）** | 成稿 `.md` 已落盘后，主 Agent **默认再启动一个子 Agent**，读 **[`docs/transcript_morandi_html/README.md`](docs/transcript_morandi_html/README.md)** 与 **[`morandi-template.html`](docs/transcript_morandi_html/morandi-template.html)**，生成 **`*_transcript_成稿.html`**。主对话同样不要整页贴 HTML。用户**明确只要 md、不要网页**时可跳过。 |
-
-**用户操作**：发 **B 站链接** 或 `@` 已有 `*_transcript.json` 即可；**不要求**手抄 JSON。
-
-仓库内**没有** Python 调用 Cursor；子 Agent 是 Cursor 侧能力，不是脚本里的函数。**不提供**命令行 `md→html`，HTML 由子 Agent 按 **`docs/transcript_morandi_html/`** 指引写出（与成稿 Skill 分离，**不**再占一个全局 Skill）。生成 `*_transcript_成稿.html` 后应按该文档用 **`open` / `xdg-open` / `start`** **自动在浏览器中打开**，无需用户手动打开文件。
-
----
-
-## 3. 总体流程（数据流）
+## 流程总览
 
 ```
-B 站 URL 或 BV 号
-    → 拉取稿件元数据（标题、分 P、cid、aid）
-    → 每一分 P：优先官方字幕（WBI）→ 可选 yt-dlp 字幕 → 否则下载音轨 + faster-whisper ASR
-    → 合并分 P 分段 → 写入 *_transcript.json
-    →（可选）finalize：生成初版成稿 md
-    →（Cursor 子 Agent）bilibili-transcript-finalize：翻译 + 总结 + 润色 → *_transcript_成稿.md
-    →（默认再开子 Agent）docs/transcript_morandi_html：成稿 md → 同路径 *_transcript_成稿.html
+视频 URL / ID
+  → Provider 识别来源（Bilibili / ...）
+  → 拉取元数据（标题、分 P、cid、aid）
+  → 每个分 P：优先字幕（WBI / yt-dlp）→ 否则下载音轨 + faster-whisper ASR
+  → 合并分段 → *_transcript.json
+  → 可选：生成草稿 Markdown
+  → AI 助手：润色成稿 → *_transcript_成稿.md
+  → 导出 HTML → *_transcript_成稿.html
 ```
 
----
+## 三阶段分工
 
-## 4. 代码结构（`bilibili_transcript/`）
 
-| 文件 | 职责 |
-|------|------|
-| [`cli.py`](bilibili_transcript/cli.py) | **主入口**：下载 / 字幕 / ASR、写 JSON、调用成稿与草稿。 |
-| [`__main__.py`](bilibili_transcript/__main__.py) | `python -m bilibili_transcript` 时转调 `cli.main()`。 |
-| [`draft_md.py`](bilibili_transcript/draft_md.py) | 生成 `{bvid}_transcript.md`：按时间跨度分块的**纯草稿**（总结处留空），不含任何 LLM 调用。 |
-| [`download.py`](bilibili_transcript/download.py) | `pagelist`、`playurl` 下载音轨；`ffmpeg` 转 MP3；可选 `yt-dlp` 兜底。 |
-| [`meta.py`](bilibili_transcript/meta.py) | 拉取视频标题等元数据。 |
-| [`bvid.py`](bilibili_transcript/bvid.py) | 从 URL 解析 BV 号、构造分 P 页面 URL。 |
-| [`wbi.py`](bilibili_transcript/wbi.py) | B 站 **WBI 签名**。 |
-| [`subtitles.py`](bilibili_transcript/subtitles.py) | 官方 CC 解析；可选 `yt-dlp` 字幕文件解析。 |
-| [`transcribe.py`](bilibili_transcript/transcribe.py) | **faster-whisper** 转写、`save_transcript_json`。 |
-| [`finalize_md.py`](bilibili_transcript/finalize_md.py) | 从 JSON 生成 **初版**成稿 Markdown（结构 + 原文拼接）；特定 BV 的内嵌总结/分节；**不**对正文做脚本级润色。 |
-| [`text_post.py`](bilibili_transcript/text_post.py) | `sanitize_filename_title`；`format_body` 为兼容保留，**原样透传**正文。 |
-| [`tools/export_morandi_html.py`](tools/export_morandi_html.py) | 成稿 md 定稿后生成莫兰迪 HTML（**仅**结构与转义，不改正文）。 |
+| 阶段          | 执行者                                         | 产出                                 |
+| ----------- | ------------------------------------------- | ---------------------------------- |
+| **① 脚本**    | `python -m bilibili_transcript`             | `*_transcript.json`（分段时间轴 + 原文）    |
+| **② AI 助手** | Cursor / Claude Code / 其他                   | `*_transcript_成稿.md`（总结 + 润色 + 翻译） |
+| **③ 导出**    | `python -m bilibili_transcript export-html` | `*_transcript_成稿.html`（莫兰迪卡片）      |
 
-已删除、不再维护的文件（避免误以为「还有机翻/LLM 模块」）：~~`translate.py`~~、~~`llm_md.py`~~、~~`cursor_export.py`~~（曾生成易误解的 `*_cursor_prompt.md`）。
 
----
+脚本只管拉稿和结构化。去口癖、标点、分段、翻译等终稿处理由 AI 助手完成。
 
-## 5. 输出物说明
+## 代码结构
 
-| 产物 | 说明 |
-|------|------|
-| `*_transcript.json` | **事实源**：`bvid`、`title`、`text`、`segments[]`、`part_sources`。 |
-| `{bvid}_transcript.md` | 按时间分块的草稿；总结与话题标题为空或占位，需自行编辑（`--json-only` 时不生成）。 |
-| `{标题slug}_{BV号}_transcript_成稿.md` | **检阅用成稿**：Python 可出初版（结构 + 原文）；可读终稿由 **Cursor 子 Agent** 润色/翻译后覆盖（见上）。 |
-| `{标题slug}_{BV号}_transcript_成稿.html` | **默认同套产出**：单页阅读版，由 **Cursor** 按 **`docs/transcript_morandi_html/`** 生成，与成稿同目录、同主文件名（用户明确不要网页时可无）。 |
-| `case_outputs/` | 示例输出目录；可含 `*_p1.mp3` 等。 |
-
-重新跑流水线会**覆盖**上述 md（手润稿请先备份）。
-
----
-
-## 6. 环境与运行
-
-- **依赖**：[`requirements.txt`](requirements.txt)（`requests`、`faster-whisper`、`yt-dlp` 等）。
-- **系统工具**：`ffmpeg`；ASR 可选 CUDA。建议用项目 `venv` 的 `python`，避免系统 Python 缺依赖。
-
-```bash
-python -m bilibili_transcript "BV1xxxxxxxxx" -o case_outputs/BV1xxxxxxxxx
+```
+bilibili_transcript/
+  cli.py              主入口 + export-html 子命令
+  providers/
+    base.py            Provider 抽象接口（扩展新来源时实现此接口）
+    bilibili.py        Bilibili Provider
+  bvid.py              BV 号解析
+  meta.py              B 站元数据 API
+  download.py          音轨下载（API + yt-dlp 兜底）+ ffmpeg 转码
+  wbi.py               B 站 WBI 签名
+  subtitles.py         官方字幕抓取 + SRT 解析
+  transcribe.py        faster-whisper ASR
+  draft_md.py          按时间分块的草稿 Markdown
+  finalize_md.py       结构化成稿 Markdown（从 presets/ 加载配置）
+  export_html.py       成稿 Markdown → 莫兰迪 HTML
+  text_post.py         文件名清理
+  utils.py             公共工具函数
+  presets/             按视频 ID 的预设内容（标题、摘要、总结）
 ```
 
-常用参数见 [`TRANSCRIPT_STRATEGY.md`](TRANSCRIPT_STRATEGY.md)。
+## 字幕策略（每个分 P 独立判断）
 
-**Skill 全局使用（可选）**：将 `.cursor/skills/bilibili-transcript-finalize/` 复制到 `~/.cursor/skills/bilibili-transcript-finalize/`。成稿转网页的说明与模板在 **`docs/transcript_morandi_html/`**，随仓库克隆即可，**不必**再复制为第二个 Skill。
+1. **B 站官方 CC**（推荐）— WBI 签名请求 `x/player/wbi/v2`
+2. **yt-dlp 字幕文件** — 需 `--cookies-from-browser` 或 `--ytdlp-subs`
+3. **本机 faster-whisper ASR** — 以上均不可用时的兜底
 
----
+部分稿件的字幕**仅在登录态返回**。未登录时接口返回空列表属正常现象，不是 bug。
 
-## 7. 成稿逻辑与定制点（`finalize_md.py`）
+## 常用参数
 
-- 对特定 `bvid` 可配置：分节标题、段前摘要、全文总结（如 `_full_summary_bv1f3()`）。
-- 逐字部分为 **segments 原文拼接**，不经 Python 做标点/分段/去口癖；**英/中文可读终稿**均由 Skill `bilibili-transcript-finalize` 在 Cursor 侧由**子 Agent**完成（翻译、润色、排版）。
 
----
+| 场景               | 参数                                                        |
+| ---------------- | --------------------------------------------------------- |
+| 默认（能抓字幕就不 ASR）   | 无额外参数                                                     |
+| 登录字幕在网页有、接口无     | `--cookies-from-browser chrome`                           |
+| 强制 ASR           | `--force-asr`                                             |
+| 仅输出 JSON         | `--json-only`                                             |
+| 官方无 CC 时试 yt-dlp | `--ytdlp-subs`                                            |
+| 指定分 P            | `--part N`                                                |
+| 导出 HTML          | `python -m bilibili_transcript export-html path/to/成稿.md` |
 
-## 8. 已知案例
 
-- `case_outputs/BV1f3DYBDE9h/`：中文评述，成稿有手润版。
-- `case_outputs/BV1ijE4zwEHP/`：英文 ASR，成稿中文为对话助手翻译示例。
+## 输出物
 
----
 
-## 9. 接手检查清单
+| 文件                     | 说明                                                 |
+| ---------------------- | -------------------------------------------------- |
+| `*_transcript.json`    | 事实源：`video_id`、`title`、`segments[]`、`part_sources` |
+| `{bvid}_transcript.md` | 按时间分块的草稿（总结留空）                                     |
+| `*_transcript_成稿.md`   | 结构化成稿（初版由脚本生成，终稿由 AI 覆盖）                           |
+| `*_transcript_成稿.html` | 莫兰迪卡片单页 HTML                                       |
 
-1. 能成功跑通命令并生成 JSON。
-2. 阅读 `TRANSCRIPT_STRATEGY.md`，理解无登录时 CC 可能为空。
-3. 重要成稿改完后做备份，避免被流水线覆盖。
-4. 若需自动调用公司模型 API，应**新开模块**评审后再接，本仓库默认不包含。
 
----
+## 扩展新的视频来源
 
-## 10. 版本与维护
+1. 在 `bilibili_transcript/providers/` 下创建新模块（如 `youtube.py`）
+2. 实现 `TranscriptProvider` 接口：`match()`、`extract_id()`、`fetch_metadata()`、`fetch_segments()`、`download_audio()`
+3. 在 `providers/__init__.py` 的 `PROVIDERS` 列表中注册
+4. 下游流程（JSON → MD → HTML）无需改动
 
-- 包版本见 [`bilibili_transcript/__init__.py`](bilibili_transcript/__init__.py) 中的 `__version__`。
+```python
+# providers/youtube.py 示例骨架
+class YouTubeProvider(TranscriptProvider):
+    name = "youtube"
+
+    def match(self, url_or_id: str) -> bool:
+        return "youtube.com" in url_or_id or "youtu.be" in url_or_id
+    # ... 实现其余方法
+```
+
+## 环境要求
+
+- Python ≥ 3.10
+- `ffmpeg` on PATH
+- 依赖：`pip install -e .` 或 `pip install -r requirements.txt`
+- ASR 可选 CUDA（`--device cuda`）
+
+## AI 助手集成
+
+本项目的 Skill 文件（`.cursor/skills/bilibili-transcript-finalize/SKILL.md`）定义了 AI 助手的执行流程。它不绑定特定工具——任何能读写文件、执行 shell 命令的 AI 编程助手都可以按此流程工作。
+
+## 已知案例
+
+- `case_outputs/BV1f3DYBDE9h/` — 中文评述
+- `case_outputs/BV1ijE4zwEHP/` — 英文 ASR
+- `case_outputs/BV1728bzzEwA/` — 多 P 视频
+
